@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced JavaScript + TypeScript for Modern Web Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --text: #f1f5f9;
+            --accent: #22d3ee;
+            --code-bg: #0d1117;
+            --ts-blue: #3178c6;
+            --react-blue: #61dafb;
+            --warning: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+            color: var(--text);
+            line-height: 1.65;
+            min-height: 100vh;
+        }
+
+        nav {
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.96);
+            padding: 2.5rem 1.8rem;
+            position: fixed;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            overflow-y: auto;
+        }
+
+        nav h2 {
+            font-size: 1rem;
+            letter-spacing: 1.8px;
+            margin-bottom: 2.2rem;
+            color: var(--accent);
+            opacity: 0.85;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.97rem;
+            display: block;
+            padding: 0.7rem 0;
+            transition: all 0.22s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        main {
+            margin-left: 280px;
+            padding: 5rem 4rem;
+            max-width: 1180px;
+        }
+
+        header {
+            margin-bottom: 6rem;
+            padding-left: 2.2rem;
+            border-left: 6px solid var(--primary);
+        }
+
+        h1 {
+            font-size: 3.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 span {
+            color: var(--secondary);
+        }
+
+        section {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            padding: 3.2rem;
+            border-radius: 1.6rem;
+            margin-bottom: 5rem;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            color: var(--accent);
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h3 {
+            color: var(--primary);
+            font-size: 1.55rem;
+            margin: 2.4rem 0 1.2rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 14px;
+        }
+
+        .warning,
+        .takeaway {
+            padding: 1.1rem 1.4rem;
+            border-radius: 10px;
+            margin: 1.4rem 0;
+            font-size: 0.96rem;
+        }
+
+        .warning {
+            background: rgba(248, 113, 113, 0.12);
+            border-left: 4px solid var(--warning);
+        }
+
+        .takeaway {
+            background: rgba(34, 211, 238, 0.12);
+            border-left: 4px solid var(--accent);
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1.6rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            margin: 1.4rem 0;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .comment {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .keyword {
+            color: #f472b6;
+        }
+
+        .type {
+            color: var(--ts-blue);
+        }
+
+        .string {
+            color: #4ade80;
+        }
+
+        .func {
+            color: #fbbf24;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        ul.checklist {
+            list-style: none;
+            margin: 1.4rem 0;
+        }
+
+        ul.checklist li {
+            margin-bottom: 0.9rem;
+            position: relative;
+            padding-left: 2.2rem;
+        }
+
+        ul.checklist li::before {
+            content: "→";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 960px) {
+            nav {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2> TOPICS</h2>
+        <ul>
+            <li><a href="#arrays">1. Immutability – Arrays & Objects</a></li>
+            <li><a href="#es6">2. ES6+ Must-Know Features</a></li>
+            <li><a href="#typescript">3. TypeScript – Core Concepts & Best Practices</a></li>
+            <li><a href="#async">4. Modern Async JavaScript</a></li>
+            <li><a href="#react">5. JavaScript Patterns Every React Developer Needs</a></li>
+            <li><a href="#clean">6. Clean Code & Defensive Programming</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Advanced JavaScript <span>& TypeScript</span></h1>
+            <p style="font-size:1.2rem; opacity:0.9; max-width:620px;">
+                Building reliable, maintainable, and production-ready frontend code.<br>
+                These are the exact skills companies expect in 2026.
+            </p>
+        </header>
+
+        <section id="arrays">
+            <h2>1. Immutability – Arrays & Objects</h2>
+            <p>Mutating data is the #1 source of hard-to-find bugs in React & large apps.</p>
+
+            <div class="takeaway">
+                <strong>Golden rule:</strong> Never change (mutate) data directly.<br>
+                Always create a <strong>new copy</strong> → predictable state, easier debugging, React can optimize
+                renders.
+            </div>
+
+            <pre><code><span class="comment">// AVOID THIS (mutation)</span>
+const numbers = [10, 20, 30];
+numbers.push(40);           <span class="comment">// original array changed</span>
+numbers[1] = 99;
+
+<span class="comment">// DO THIS (immutable update)</span>
+const newNumbers = [...numbers, 40];           <span class="comment">// new array</span>
+const updated = numbers.map(n => n === 20 ? 99 : n);</code></pre>
+
+            <pre><code><span class="comment">// Object – immutable update (most common in React)</span>
+const user = { id: 1, name: "Mia", active: false };
+
+const updatedUser = {
+  ...user,
+  active: true,
+  lastLogin: new Date().toISOString()
+};</code></pre>
+
+
+        </section>
+
+        <section id="es6">
+            <h2>2. ES6+ Features You Really Need</h2>
+
+            <h3>A. let / const – Block Scope </h3>
+            <div class="takeaway">Use <code>const</code> by default. Only use <code>let</code> when you must reassign.
+            </div>
+
+
+
+            <h3>B. Destructuring + Rest / Spread (very frequent in React)</h3>
+            <pre><code>
+const user = {
+  name: "Rim",
+  age: 20,
+  email: "rim@example.com",
+  role: "admin"
+};
+
+const { name, age, ...rest } = user;
+
+console.log(name); // "Rim"
+console.log(age);  // 20
+console.log(rest); // { email: "rim@example.com", role: "admin" }
+
+<span class="comment">// React props example</span>
+function Button({ children, variant = "primary", ...props }) {
+  return &lt;button className={`btn-${variant}`} {...props}&gt;{children}&lt;/button&gt;;
+}</code></pre>
+
+            <h3>C. Optional Chaining & Nullish Coalescing (2020+)</h3>
+            <pre><code>const city = user?.address?.city ?? "Unknown";</code></pre>
+        </section>
+
+        <section id="typescript">
+            <h2>3. TypeScript – From Chaos to Confidence</h2>
+
+            <div class="takeaway">
+                TypeScript doesn't make code slower — it prevents hundreds of runtime bugs.<br>
+                Most serious frontend jobs in 2026 require it.
+            </div>
+
+            <pre><code><span class="keyword">type</span> <span class="type">UserRole</span> = "admin" | "editor" | "viewer";
+
+<span class="keyword">interface</span> <span class="type">User</span> {
+  readonly id: string | number;     <span class="comment">// cannot reassign</span>
+  email: string;
+  role: <span class="type">UserRole</span>;
+  preferences?: { theme: "dark" | "light" };   <span class="comment">// optional</span>
+}
+
+<span class="keyword">function</span> <span class="func">greetUser</span>(user: <span class="type">User</span>): string {
+  <span class="keyword">return</span> `Hello ${user.email} (${user.role})`;
+}</code></pre>
+
+            <div class="warning">
+                <strong>Beginner mistakes to avoid:</strong>
+                <ul style="margin:0.8rem 0 0 1.6rem;">
+                    <li>Using <code>any</code> everywhere → defeats the purpose</li>
+                    <li>Writing <code>: any</code> just to silence errors</li>
+                    <li>Mutating readonly properties</li>
+                </ul>
+            </div>
+
+            <div class="takeaway" style="margin-top:2rem;">
+                Best practice 2026: Enable <code>strict: true</code> in tsconfig.json
+            </div>
+        </section>
+
+        <section id="async">
+            <h2>4. Modern Async / Await + Error Handling</h2>
+
+            <pre><code><span class="keyword">async function</span> <span class="func">loadProfile</span>(id: string) {
+  <span class="keyword">try</span> {
+    const res = <span class="keyword">await</span> fetch(`/api/users/${id}`);
+    <span class="keyword">if</span> (!res.ok) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">Error</span>(`HTTP ${res.status}`);
+    <span class="keyword">const</span> user = <span class="keyword">await</span> res.json() <span class="keyword">as</span> <span class="type">User</span>;
+    <span class="keyword">return</span> user;
+  } <span class="keyword">catch</span> (err) {
+    console.error("Profile load failed:", err);
+    <span class="keyword">throw</span> err;               <span class="comment">// let React Error Boundary catch it</span>
+  }
+}</code></pre>
+
+            <div class="warning">
+                <strong>Never forget:</strong> Always handle errors in async functions.<br>
+                Unhandled promise rejections → very bad user experience + hard to debug.
+            </div>
+        </section>
+
+        <section id="react">
+            <h2>5. JavaScript Patterns Every React Developer Needs</h2>
+            <div class="badge" style="background:var(--react-blue); color:#000;">React 18/19 Ready</div>
+
+            <ul class="checklist">
+                <li>Conditional rendering with <code>&&</code> and ternaries</li>
+                <li><code>??</code> nullish coalescing for default values</li>
+                <li>Early returns + guard clauses</li>
+                <li>Key prop in lists (string or number – never index alone)</li>
+                <li>Spreading props <code>{...rest}</code></li>
+                <li>useState + functional updates when depending on prev state</li>
+            </ul>
+
+
+        </section>
+
+        <section id="clean">
+            <h2>6. Clean Code & Defensive Programming</h2>
+
+            <div class="takeaway">
+                Good names > clever code.<br>
+                Small functions (ideally < 20 lines) do one thing well. </div>
+
+                    <ul class="checklist">
+                        <li><code>isAuthenticated</code> > <code>auth</code></li>
+                        <li><code>fetchUserProfile</code> > <code>getData</code></li>
+                        <li>Extract complex logic into named functions</li>
+                        <li>Fail fast – validate early (guard clauses)</li>
+                        <li>Add JSDoc / TS comments for public APIs</li>
+                    </ul>
+
+                    <pre>
+<code>
+/**
+ * Greets a user by name and role.
+ * @param {Object} user - The user object.
+ * @param {string} user.name - The user's name.
+ * @param {string} user.role - The user's role (admin, editor, viewer).
+ * @returns {string} A greeting message.
+ */
+function greetUser(user) {
+  return `Hello ${user.name} (${user.role})`;
+}
+</code>
+</pre>
+        </section>
+    </main>
+
+</body>
+
+</html>

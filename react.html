@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Fundamentals + Core Hooks (with TypeScript)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.78);
+            --text: #f1f5f9;
+            --accent: #22d3ee;
+            --react-blue: #61dafb;
+            --code-bg: #0d1117;
+            --warning: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        nav {
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.96);
+            padding: 2.5rem 1.8rem;
+            position: fixed;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            overflow-y: auto;
+        }
+
+        nav h2 {
+            font-size: 1rem;
+            letter-spacing: 1.8px;
+            margin-bottom: 2.2rem;
+            color: var(--accent);
+            opacity: 0.85;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.97rem;
+            display: block;
+            padding: 0.7rem 0;
+            transition: all 0.22s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        main {
+            margin-left: 280px;
+            padding: 5rem 4rem;
+            max-width: 1180px;
+        }
+
+        header {
+            margin-bottom: 6rem;
+            padding-left: 2.2rem;
+            border-left: 6px solid var(--react-blue);
+        }
+
+        h1 {
+            font-size: 3.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 span {
+            color: var(--secondary);
+        }
+
+        section {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            padding: 3.2rem;
+            border-radius: 1.6rem;
+            margin-bottom: 5rem;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            color: var(--react-blue);
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h3 {
+            color: var(--primary);
+            font-size: 1.55rem;
+            margin: 2.4rem 0 1.2rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 14px;
+        }
+
+        .warning,
+        .takeaway,
+        .tip {
+            padding: 1.1rem 1.4rem;
+            border-radius: 10px;
+            margin: 1.4rem 0;
+            font-size: 0.96rem;
+        }
+
+        .warning {
+            background: rgba(248, 113, 113, 0.12);
+            border-left: 4px solid var(--warning);
+        }
+
+        .takeaway {
+            background: rgba(34, 211, 238, 0.14);
+            border-left: 4px solid var(--accent);
+        }
+
+        .tip {
+            background: rgba(236, 72, 153, 0.12);
+            border-left: 4px solid var(--secondary);
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1.6rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            margin: 1.4rem 0;
+        }
+
+        .comment {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .keyword {
+            color: #f472b6;
+        }
+
+        .type {
+            color: #3178c6;
+        }
+
+        .string {
+            color: #4ade80;
+        }
+
+        .func {
+            color: #fbbf24;
+        }
+
+        .badge {
+            background: var(--react-blue);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        ul.checklist {
+            list-style: none;
+            margin: 1.4rem 0;
+        }
+
+        ul.checklist li {
+            margin-bottom: 0.9rem;
+            position: relative;
+            padding-left: 2.2rem;
+        }
+
+        ul.checklist li::before {
+            content: "→";
+            color: var(--react-blue);
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 960px) {
+            nav {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2> TOPICS</h2>
+        <ul>
+            <li><a href="#ecosystem">1. React Ecosystem Overview (2026)</a></li>
+            <li><a href="#components">2. Components & JSX</a></li>
+            <li><a href="#props-state">3. Props & State (with TypeScript)</a></li>
+            <li><a href="#hooks">4. Essential React Hooks</a></li>
+            <li><a href="#rendering">5. Conditional Rendering & Lists</a></li>
+            <li><a href="#best">6. Best Practices & Common Pitfalls</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>React Fundamentals <span>& Hooks</span></h1>
+            <p style="font-size:1.2rem; opacity:0.9; max-width:620px;">
+                Building modern, type-safe React applications.<br>
+                Focus: TypeScript + the hooks you'll use every day in 2026.
+            </p>
+        </header>
+
+        <section id="ecosystem">
+            <h2>1. React Ecosystem Overview (2026 Perspective)</h2>
+            <p>React is still the dominant frontend library — but the ecosystem has matured.</p>
+
+            <ul class="checklist">
+                <li><strong>Language:</strong> TypeScript is now expected in 85%+ of job postings</li>
+                <li><strong>State Management:</strong> Zustand / Jotai / Redux Toolkit
+                </li>
+                <li><strong>Routing:</strong> React Router v6 / App Router (Next.js)</li>
+                <li><strong>Styling:</strong> Tailwind CSS + custom styles</li>
+                <li><strong>Data Fetching:</strong> TanStack Query (React Query), SWR, Next.js fetch + caching</li>
+                <li><strong>Frameworks:</strong> Next.js 15 (App Router + Server Components)
+                </li>
+            </ul>
+
+            <div class="takeaway">
+                For learning fundamentals → pure React + TypeScript + Vite is still the best starting point.<br>
+                Then move to Next.js once comfortable.
+            </div>
+        </section>
+
+        <section id="components">
+            <h2>2. Components & JSX</h2>
+
+            <div class="tip">
+                JSX = JavaScript + XML-like syntax.<br>
+
+            </div>
+
+            <pre><code><span class="comment">// Function Component (preferred in 2026)</span>
+<span class="keyword">function</span> <span class="func">Greeting</span>() {
+  <span class="keyword">return</span> (
+    &lt;div className="card"&gt;
+      &lt;h1&gt;Hello, React!&lt;/h1&gt;
+      &lt;p&gt;Welcome to 2026.&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="comment">// Arrow function style (very common)</span>
+<span class="keyword">const</span> <span class="func">Header</span> = () =&gt; &lt;header&gt;&lt;h1&gt;My App&lt;/h1&gt;&lt;/header&gt;;</code></pre>
+
+            <div class="warning">
+                <strong>Rule:</strong> Always return a single root element (or fragment <code>&lt;&gt;&lt;/&gt;</code>).
+            </div>
+        </section>
+
+        <section id="props-state">
+            <h2>3. Props & State (TypeScript Edition)</h2>
+
+            <h3>Props – Data flowing down</h3>
+            <pre><code><span class="keyword">interface</span> <span class="type">ButtonProps</span> {
+  label: string;
+  onClick: () =&gt; void;
+  disabled?: boolean;
+  variant?: <span class="string">"primary"</span> | <span class="string">"secondary"</span>;
+}
+
+<span class="keyword">function</span> <span class="func">Button</span>({ label, onClick, disabled = <span class="keyword">false</span>, variant = <span class="string">"primary"</span> }: <span class="type">ButtonProps</span>) {
+  <span class="keyword">return</span> (
+    &lt;button
+      className={`btn btn-${variant}`}{...{ disabled }}
+      onClick={onClick}
+    &gt;
+      {label}
+    &lt;/button&gt;
+  );
+}</code></pre>
+
+            <h3>State – Data living inside component</h3>
+            <pre><code><span class="keyword">import</span> { useState } <span class="keyword">from</span> <span class="string">'react'</span>;
+
+<span class="keyword">function</span> <span class="func">Toggle</span>() {
+  <span class="keyword">const</span> [isOn, setIsOn] = useState&lt;boolean&gt;(<span class="keyword">false</span>);
+
+  <span class="keyword">return</span> (
+    &lt;button onClick={() =&gt; setIsOn(prev =&gt; !prev)}&gt;
+      {isOn ? <span class="string">'ON'</span> : <span class="string">'OFF'</span>}
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </section>
+
+        <section id="hooks">
+            <h2>4. Essential React Hooks (The Ones You Use Daily)</h2>
+
+            <h3>useState – Local mutable state</h3>
+            <pre><code><span class="keyword">const</span> [name, setName] = useState&lt;string&gt;(<span class="string">""</span>);</code></pre>
+
+            <h3>useEffect – Side effects (fetch, subscriptions, cleanup)</h3>
+            <pre><code>useEffect(() =&gt; {
+  <span class="keyword">const</span> timer = setInterval(() =&gt; console.log(<span class="string">"Tick"</span>), 1000);
+  <span class="keyword">return</span> () =&gt; clearInterval(timer); <span class="comment">// cleanup!</span>
+}, []); <span class="comment">// empty = run once on mount</span></code></pre>
+
+            <h3>useRef – Persist values across renders + DOM refs</h3>
+            <pre><code><span class="keyword">const</span> inputRef = useRef&lt;HTMLInputElement&gt;(<span class="keyword">null</span>);
+useEffect(() =&gt; { inputRef.current?.focus(); }, []);</code></pre>
+
+            <h3>useContext – Access context without prop drilling</h3>
+            <pre><code><span class="keyword">const</span> theme = useContext(ThemeContext);</code></pre>
+
+            <h3>useReducer – Complex state logic</h3>
+            <pre><code><span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initialState);</code></pre>
+
+            <h3>useMemo / useCallback – Performance optimization</h3>
+            <pre><code><span class="keyword">const</span> expensiveValue = useMemo(() =&gt; computeExpensive(items), [items]);
+<span class="keyword">const</span> stableHandler = useCallback(() =&gt; doSomething(id), [id]);</code></pre>
+
+            <div class="takeaway">
+                Rule of thumb: Start with <code>useState</code> + <code>useEffect</code>.<br>
+                Add others only when you hit real problems (re-renders, prop drilling, complex logic).
+            </div>
+        </section>
+
+        <section id="rendering">
+            <h2>5. Conditional Rendering & Lists</h2>
+
+            <h3>Conditional Rendering Patterns</h3>
+            <pre><code>{isLoading &amp;&amp; &lt;Spinner /&gt;}
+{error &amp;&amp; &lt;ErrorMessage message={error} /&gt;}
+{!isLoading &amp;&amp; !error &amp;&amp; &lt;Content /&gt;}
+
+<span class="comment">// Ternary (good for small conditions)</span>
+{isLoggedIn ? &lt;Dashboard /&gt; : &lt;Login /&gt;}
+
+<span class="comment">// Early return (cleanest for complex logic)</span>
+<span class="keyword">if</span> (isLoading) <span class="keyword">return</span> &lt;Spinner /&gt;;
+<span class="keyword">if</span> (error) <span class="keyword">return</span> &lt;Error /&gt;;</code></pre>
+
+            <h3>Rendering Lists (always use key!)</h3>
+            <pre><code>&lt;ul&gt;
+  {users.map(user =&gt; (
+    &lt;li key={user.id}&gt;{user.name} – {user.email}&lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+
+            <div class="warning">
+                <strong>Never</strong> use array index as <code>key</code> unless list is static & never reorders.<br>
+                Bad: <code>key={index}</code> → bugs on sort/filter/insert
+            </div>
+        </section>
+
+        <section id="best">
+            <h2>6. Best Practices & Common Beginner Mistakes (2026)</h2>
+
+            <ul class="checklist">
+                <li>Use TypeScript interfaces/props for every component</li>
+                <li>Prefer fragments <code>&lt;&gt;&lt;/&gt;</code> over unnecessary <code>&lt;div&gt;</code></li>
+                <li>Always handle loading + error states</li>
+                <li>Put <code>key</code> on the outermost element in .map()</li>
+                
+                <li>Clean up effects (return function from useEffect)</li>
+            </ul>
+
+
+        </section>
+    </main>
+
+</body>
+
+</html>
