@@ -1,0 +1,428 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Props, useState, useEffect & Router (Modern 2026 Style)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.78);
+            --text: #f1f5f9;
+            --accent: #22d3ee;
+            --react-blue: #61dafb;
+            --code-bg: #0d1117;
+            --warning: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        nav {
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.96);
+            padding: 2.5rem 1.8rem;
+            position: fixed;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            overflow-y: auto;
+        }
+
+        nav h2 {
+            font-size: 1rem;
+            letter-spacing: 1.8px;
+            margin-bottom: 2.2rem;
+            color: var(--accent);
+            opacity: 0.85;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.97rem;
+            display: block;
+            padding: 0.7rem 0;
+            transition: all 0.22s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        main {
+            margin-left: 280px;
+            padding: 5rem 4rem;
+            max-width: 1180px;
+        }
+
+        header {
+            margin-bottom: 6rem;
+            padding-left: 2.2rem;
+            border-left: 6px solid var(--react-blue);
+        }
+
+        h1 {
+            font-size: 3.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 span {
+            color: var(--secondary);
+        }
+
+        section {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            padding: 3.2rem;
+            border-radius: 1.6rem;
+            margin-bottom: 5rem;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            color: var(--react-blue);
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h3 {
+            color: var(--primary);
+            font-size: 1.55rem;
+            margin: 2.4rem 0 1.2rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 14px;
+        }
+
+        .warning,
+        .takeaway,
+        .tip {
+            padding: 1.1rem 1.4rem;
+            border-radius: 10px;
+            margin: 1.4rem 0;
+            font-size: 0.96rem;
+        }
+
+        .warning {
+            background: rgba(248, 113, 113, 0.12);
+            border-left: 4px solid var(--warning);
+        }
+
+        .takeaway {
+            background: rgba(34, 211, 238, 0.14);
+            border-left: 4px solid var(--accent);
+        }
+
+        .tip {
+            background: rgba(236, 72, 153, 0.12);
+            border-left: 4px solid var(--secondary);
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1.6rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            margin: 1.4rem 0;
+        }
+
+        .comment {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .keyword {
+            color: #f472b6;
+        }
+
+        .type {
+            color: #3178c6;
+        }
+
+        .string {
+            color: #4ade80;
+        }
+
+        .func {
+            color: #fbbf24;
+        }
+
+        .visual-example {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .visual-example .box {
+            display: inline-block;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--text);
+            border-radius: 0.5rem;
+            margin: 0.5rem;
+        }
+
+        @media (max-width: 960px) {
+            nav {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2> TOPICS</h2>
+        <ul>
+            <li><a href="#props">1. Props (Modern TS 2026)</a></li>
+            <li><a href="#usestate">2. useState Hook</a></li>
+            <li><a href="#useeffect">3. useEffect Hook</a></li>
+            <li><a href="#router">4. React Router (v7 2026)</a></li>
+
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>React Core: <span>Props · State · Effects · Routing</span></h1>
+            <p style="font-size:1.2rem; opacity:0.9; max-width:620px;">
+                Modern 2026 practices — plain functions, explicit types, React 19+, Router v7<br>
+                Production-ready patterns with TypeScript.
+            </p>
+        </header>
+
+        <section id="props">
+            <h2>1. Props in React (Modern TypeScript 2026)</h2>
+            <p>Props are read-only data passed from parent to child. Type directly on function params for clean,
+                flexible code with excellent generics support.</p>
+
+            <h3>Key Concepts</h3>
+            <ul class="checklist">
+                <li>Props are immutable inside the child.</li>
+                <li>Use `interface` (common for props) or `type`.</li>
+                <li>Default values via JS default parameters (`.defaultProps` removed).</li>
+                <li>Explicit `children: React.ReactNode` when needed.</li>
+            </ul>
+
+            <h3>Modern Code Example: Greeting Component</h3>
+            <pre><code><span class="comment">// Props type</span>
+<span class="keyword">interface</span> <span class="type">GreetingProps</span> {
+  name: <span class="type">string</span>;
+  age?: <span class="type">number</span>;
+}
+
+<span class="keyword">function</span> <span class="func">Greeting</span>({ name, age = 18 }: <span class="type">GreetingProps</span>) {
+  <span class="keyword">return</span> (
+    &lt;p&gt;Hello, <strong>{name}</strong>! Age: {age}&lt;/p&gt;
+  );
+}
+
+<span class="comment">// Usage</span>
+&lt;<span class="type">Greeting</span> name={<span class="string">"Alice"</span>} /&gt;
+&lt;<span class="type">Greeting</span> name={<span class="string">"Bob"</span>} age={30} /&gt;</code></pre>
+
+            <h3>With children (Card example)</h3>
+            <pre><code><span class="keyword">import</span> { <span class="type">ReactNode</span> } <span class="keyword">from</span> <span class="string">'react'</span>;
+
+<span class="keyword">interface</span> <span class="type">CardProps</span> {
+  title: <span class="type">string</span>;
+  children: <span class="type">ReactNode</span>;
+}
+
+<span class="keyword">function</span> <span class="func">Card</span>({ title, children }: <span class="type">CardProps</span>) {
+  <span class="keyword">return</span> (
+    &lt;div style={{ border: <span class="string">'1px solid #ccc'</span>, padding: <span class="string">'1.5rem'</span> }}&gt;
+      &lt;h2&gt;{title}&lt;/h2&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}
+
+&lt;<span class="type">Card</span> title={<span class="string">"Profile"</span>}&gt;
+  &lt;p&gt;Content here&lt;/p&gt;
+&lt;/<span class="type">Card</span>&gt;</code></pre>
+
+            <div class="visual-example">
+                <p>Prop Flow</p>
+                <div class="box">Parent</div> → <div class="box">Child (props)</div>
+            </div>
+
+            <div class="warning">
+                Warning: Never mutate props — always read-only.
+            </div>
+        </section>
+
+        <section id="usestate">
+            <h2>2. useState Hook</h2>
+            <p>Local component state — typed cleanly, updates batched & async.</p>
+
+            <h3>Key Concepts 2026</h3>
+            <ul class="checklist">
+                <li>Initial value or lazy function.</li>
+                <li>Callback form essential when depending on prev state.</li>
+                <li>Type inference usually sufficient; explicit when complex.</li>
+            </ul>
+
+            <pre><code><span class="keyword">import</span> { useState } <span class="keyword">from</span> <span class="string">'react'</span>;
+
+<span class="keyword">function</span> <span class="func">Counter</span>() {
+  <span class="keyword">const</span> [count, setCount] = <span class="func">useState</span>(0);
+
+  <span class="keyword">return</span> (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+            <div class="visual-example">
+                <p>State Update</p>
+                <div class="box">0</div> → Click → <div class="box">1</div>
+            </div>
+
+            <div class="takeaway">
+                Takeaway: Prefer `setX(prev => ...)` to avoid stale closures.
+            </div>
+        </section>
+
+        <section id="useeffect">
+            <h2>3. useEffect Hook</h2>
+            <p>Side effects: fetch, subscriptions, DOM. Dependency array controls timing.</p>
+
+            <pre><code><span class="keyword">import</span> { useState, useEffect } <span class="keyword">from</span> <span class="string">'react'</span>;
+
+<span class="keyword">function</span> <span class="func">UserProfile</span>({ userId }: { userId: <span class="type">string</span> }) {
+  <span class="keyword">const</span> [user, setUser] = <span class="func">useState</span>&lt;<span class="type">any</span>&gt;(null);
+
+  <span class="func">useEffect</span>(() =&gt; {
+    <span class="keyword">const</span> <span class="func">fetchUser</span> = <span class="keyword">async</span> () =&gt; {
+      <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="func">fetch</span>(`/api/user/${userId}`);
+      setUser(<span class="keyword">await</span> res.<span class="func">json</span>());
+    };
+    <span class="func">fetchUser</span>();
+
+    <span class="keyword">return</span> () =&gt; console.<span class="func">log</span>(<span class="string">'cleanup'</span>);
+  }, [userId]);
+
+  <span class="keyword">if</span> (!user) <span class="keyword">return</span> &lt;p&gt;Loading...&lt;/p&gt;;
+
+  <span class="keyword">return</span> &lt;h1&gt;{user.name}&lt;/h1&gt;;
+}</code></pre>
+
+            <div class="visual-example">
+                <p>Effect Lifecycle</p>
+                <div class="box">Mount → Run</div> → Dep change → <div class="box">Cleanup+Rerun</div> → Unmount → <div
+                    class="box">Cleanup</div>
+            </div>
+
+            
+        </section>
+
+        <section id="router">
+            <h2>4. React Router v7 (2026 — Declarative Mode)</h2>
+            <p>Client-side routing for SPAs. v7 (non-breaking from v6) adds better types, React 19 support, framework
+                bridging.</p>
+
+            <h3>Setup Steps (Vite + React + TS project)</h3>
+            <ol class="checklist">
+                <li>Install: <code>npm install react-router-dom</code></li>
+                <li>Wrap app in <code>BrowserRouter</code> (usually in main.tsx)</li>
+                <li>Define routes with <code>&lt;Routes&gt;</code> + <code>&lt;Route&gt;</code></li>
+                <li>Use <code>&lt;Link&gt;</code> / <code>useNavigate</code> for navigation</li>
+            </ol>
+
+            <h3>Basic Example: Multi-Page Feel</h3>
+            <pre><code><span class="comment">// main.tsx</span>
+<span class="keyword">import</span> { StrictMode } <span class="keyword">from</span> <span class="string">'react'</span>;
+<span class="keyword">import</span> { createRoot } <span class="keyword">from</span> <span class="string">'react-dom/client'</span>;
+<span class="keyword">import</span> { BrowserRouter } <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;
+<span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span>;
+
+createRoot(document.<span class="func">getElementById</span>(<span class="string">'root'</span>)!).<span class="func">render</span>(
+  &lt;StrictMode&gt;
+    &lt;<span class="type">BrowserRouter</span>&gt;
+      &lt;<span class="type">App</span> /&gt;
+    &lt;/<span class="type">BrowserRouter</span>&gt;
+  &lt;/StrictMode&gt;
+);</code></pre>
+
+            <pre><code><span class="comment">// App.tsx — Routes + Navigation</span>
+<span class="keyword">import</span> { Routes, Route, Link } <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;
+<span class="keyword">import</span> Home from <span class="string">'./pages/Home'</span>;
+<span class="keyword">import</span> About from <span class="string">'./pages/About'</span>;
+<span class="keyword">import</span> User from <span class="string">'./pages/User'</span>;
+
+<span class="keyword">function</span> <span class="func">App</span>() {
+  <span class="keyword">return</span> (
+    &lt;div&gt;
+      &lt;nav&gt;
+        &lt;<span class="type">Link</span> to=<span class="string">"/"</span>&gt;Home&lt;/<span class="type">Link</span>&gt; | 
+        &lt;<span class="type">Link</span> to=<span class="string">"/about"</span>&gt;About&lt;/<span class="type">Link</span>&gt;
+      &lt;/nav&gt;
+
+      &lt;<span class="type">Routes</span>&gt;
+        &lt;<span class="type">Route</span> path=<span class="string">"/"</span> element={&lt;<span class="type">Home</span> /&gt;} /&gt;
+        &lt;<span class="type">Route</span> path=<span class="string">"/about"</span> element={&lt;<span class="type">About</span> /&gt;} /&gt;
+        &lt;<span class="type">Route</span> path=<span class="string">"/user/:id"</span> element={&lt;<span class="type">User</span> /&gt;} /&gt;
+      &lt;/<span class="type">Routes</span>&gt;
+
+     &lt;/div&gt;
+  );
+}
+
+<span class="keyword">export</span> <span class="keyword">default</span> App;</code></pre>
+
+            <h3>Dynamic Params + useParams</h3>
+            <pre><code><span class="keyword">import</span> { useParams } <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;
+
+<span class="keyword">function</span> <span class="func">User</span>() {
+  <span class="keyword">const</span> { id } = <span class="func">useParams</span>();
+  <span class="keyword">return</span> &lt;h1&gt;User ID: {id}&lt;/h1&gt;;
+}</code></pre>
+
+            <div class="visual-example">
+                <p>Routing Flow</p>
+                <div class="box">/home</div> → <div class="box">/user/123</div> → <div class="box">Dynamic page</div>
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</body>
+
+</html>
