@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Databases: Relational vs Non-Relational (2026 Beginner Guide)</title>
+    <title>Databases: Relational vs Non-Relational (2026 Guide)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap"
@@ -240,11 +240,11 @@
     <nav>
         <h2> TOPICS</h2>
         <ul>
-            <li><a href="#overview">1. Overview for Beginners</a></li>
+            <li><a href="#overview">1. Overview</a></li>
             <li><a href="#relational">2. Relational Databases (MySQL)</a></li>
             <li><a href="#nonrelational">3. Non-Relational (MongoDB)</a></li>
             <li><a href="#comparison">4. Comparison</a></li>
-            <li><a href="#best">5. Best Practices 2026</a></li>
+
         </ul>
     </nav>
 
@@ -252,13 +252,13 @@
         <header>
             <h1>Databases: Relational <span>vs Non-Relational</span></h1>
             <p style="font-size:1.2rem; opacity:0.9; max-width:620px;">
-                Beginner guide to MySQL & MongoDB in 2026.<br>
+                 Guide to MySQL & MongoDB in 2026.<br>
                 With examples, queries, relations, and best practices.
             </p>
         </header>
 
         <section id="overview">
-            <h2>1. Overview for Beginners</h2>
+            <h2>1. Overview</h2>
             <p>Databases store and manage data. Relational (SQL) use tables with fixed schemas; non-relational (NoSQL)
                 are flexible for unstructured data.</p>
 
@@ -277,10 +277,9 @@
 
         <section id="relational">
             <h2>2. Relational Databases (MySQL Example)</h2>
-            <p>MySQL is open-source, ACID-compliant, uses SQL. Great for transactions, e-commerce, banking. In 2026,
-                MySQL 9.x emphasizes performance & cloud integration.</p>
+            <p>MySQL is open-source, ACID-compliant, uses SQL. Great for transactions, e-commerce, banking. </p>
 
-            <h3>Key Concepts for Beginners</h3>
+            <h3>Key Concepts</h3>
             <ul class="checklist">
                 <li>Tables: Rows (records) & columns (fields) with fixed schema.</li>
                 <li>Primary Keys: Unique ID per row.</li>
@@ -305,21 +304,117 @@
   <span class="keyword">FOREIGN KEY</span> (user_id) <span class="keyword">REFERENCES</span> users(id)
 );</code></pre>
 
-            <h3>Example Queries</h3>
-            <pre><code><span class="comment">-- Insert Data</span>
-<span class="keyword">INSERT INTO</span> users (name, email) <span class="keyword">VALUES</span> (<span class="string">'Alice'</span>, <span class="string">'alice@email.com'</span>);
-<span class="keyword">INSERT INTO</span> orders (user_id, product, amount) <span class="keyword">VALUES</span> (1, <span class="string">'Book'</span>, 19.99);
+            <h3>Example Queries + Sample Data</h3>
 
-<span class="comment">-- Select with Join</span>
-<span class="keyword">SELECT</span> u.name, o.product, o.amount
+            <p>Let's assume we start with an empty database and insert some realistic sample data.</p>
+
+            <pre><code><span class="comment">-- 1. Insert 3 users</span>
+<span class="keyword">INSERT INTO</span> users (name, email) <span class="keyword">VALUES</span>
+  (<span class="string">'Alice Johnson'</span>, <span class="string">'alice.j@email.com'</span>),
+  (<span class="string">'Bob Smith'</span>,    <span class="string">'bob.smith@work.com'</span>),
+  (<span class="string">'Clara Lee'</span>,     <span class="string">'clara.lee@gmail.com'</span>);
+
+<span class="comment">-- 2. Insert 3 orders (referencing the users by their auto-generated IDs)</span>
+<span class="keyword">INSERT INTO</span> orders (user_id, product, amount) <span class="keyword">VALUES</span>
+  (1, <span class="string">'Wireless Mouse'</span>, 29.99),
+  (1, <span class="string">'USB-C Cable'</span>,    12.50),
+  (2, <span class="string">'Mechanical Keyboard'</span>, 89.00),
+  (3, <span class="string">'Notebook 500 pages'</span>, 8.75);</code></pre>
+
+            <h4>Resulting tables after inserts</h4>
+
+            <div style="margin: 1.5rem 0; overflow-x: auto;">
+                <strong>users table</strong>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Alice Johnson</td>
+                            <td>alice.j@email.com</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Bob Smith</td>
+                            <td>bob.smith@work.com</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Clara Lee</td>
+                            <td>clara.lee@gmail.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin: 1.5rem 0; overflow-x: auto;">
+                <strong>orders table</strong>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>user_id</th>
+                            <th>product</th>
+                            <th>amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Wireless Mouse</td>
+                            <td>29.99</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>USB-C Cable</td>
+                            <td>12.50</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>Mechanical Keyboard</td>
+                            <td>89.00</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>Notebook 500 pages</td>
+                            <td>8.75</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Common Queries using the sample data</h4>
+
+            <pre><code><span class="comment">-- Get all orders with customer name (JOIN)</span>
+<span class="keyword">SELECT</span> 
+  u.name AS customer,
+  o.product,
+  o.amount,
+  o.id AS order_id
 <span class="keyword">FROM</span> users u
-<span class="keyword">INNER JOIN</span> orders o <span class="keyword">ON</span> u.id = o.user_id;
+<span class="keyword">INNER JOIN</span> orders o <span class="keyword">ON</span> u.id = o.user_id
+<span class="keyword">ORDER BY</span> o.amount <span class="keyword">DESC</span>;
 
-<span class="comment">-- Update</span>
-<span class="keyword">UPDATE</span> orders <span class="keyword">SET</span> amount = 24.99 <span class="keyword">WHERE</span> id = 1;
 
-<span class="comment">-- Delete</span>
-<span class="keyword">DELETE FROM</span> orders <span class="keyword">WHERE</span> id = 1;</code></pre>
+<span class="comment">-- Update an order price</span>
+<span class="keyword">UPDATE</span> orders 
+<span class="keyword">SET</span> amount = 34.99 
+<span class="keyword">WHERE</span> id = 1;
+
+<span class="comment">-- Delete a specific order</span>
+<span class="keyword">DELETE FROM</span> orders 
+<span class="keyword">WHERE</span> id = 4;</code></pre>
+
 
             <div class="visual-example">
                 <p>Visual: Relational Schema</p>
@@ -341,8 +436,7 @@
                 <li>Collections: Groups of documents (like tables, but flexible).</li>
                 <li>Documents: JSON objects, no fixed schema.</li>
                 <li>Embedded Data: Nest related data (denormalized).</li>
-                <li>Aggregation: Pipeline for complex queries.</li>
-                <li>Sharding: Distribute data for scale.</li>
+
             </ul>
 
             <h3>Example Schema: Users & Orders (Embedded)</h3>
@@ -416,7 +510,7 @@ db.users.<span class="func">updateOne</span>(
                     <tr>
                         <td>Queries</td>
                         <td>SQL (structured)</td>
-                        <td>MQL (query objects, aggregation)</td>
+                        <td>MQL (query objects)</td>
                     </tr>
 
                     <tr>
@@ -427,7 +521,7 @@ db.users.<span class="func">updateOne</span>(
                     <tr>
                         <td>Consistency</td>
                         <td>Strong (ACID)</td>
-                        <td>Eventual (BASE), tunable</td>
+                        <td>Eventual (BASE)</td>
                     </tr>
                 </tbody>
             </table>
@@ -437,27 +531,7 @@ db.users.<span class="func">updateOne</span>(
             </div>
         </section>
 
-        <section id="best">
-            <h2>5. Best Practices in 2026</h2>
-            <ul class="checklist">
-                <li><strong>Security</strong>: Use prepared statements (MySQL) or validators (Mongo) to prevent
-                    injections.</li>
-                <li><strong>Indexing</strong>: Index frequently queried fields — crucial for perf in both.</li>
-                <li><strong>Backups</strong>: Automated daily backups + point-in-time recovery (cloud tools like AWS
-                    RDS).</li>
-                <li><strong>Schema Design</strong>: Normalize in relational (avoid redundancy); denormalize in NoSQL for
-                    speed.</li>
 
-            </ul>
-
-            <div class="warning">
-                Warning: Avoid schema changes in production without migrations.
-            </div>
-
-            <div class="takeaway">
-                These foundations let you build reliable apps. Practice with sample data sets!
-            </div>
-        </section>
     </main>
 
 </body>
