@@ -285,14 +285,9 @@
 
         <section id="usestate">
             <h2>2. useState Hook</h2>
-            <p>Local component state — typed cleanly, updates batched & async.</p>
 
-            <h3>Key Concepts 2026</h3>
-            <ul class="checklist">
-                <li>Initial value or lazy function.</li>
-                <li>Callback form essential when depending on prev state.</li>
-                <li>Type inference usually sufficient; explicit when complex.</li>
-            </ul>
+
+
 
             <pre><code><span class="keyword">import</span> { useState } <span class="keyword">from</span> <span class="string">'react'</span>;
 
@@ -302,7 +297,7 @@
   <span class="keyword">return</span> (
     &lt;div&gt;
       &lt;p&gt;Count: {count}&lt;/p&gt;
-      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+1&lt;/button&gt;
+      &lt;button onClick={() =&gt; setCount(prev =&gt; prev + 1)}&gt;+1&lt;/button&gt;
     &lt;/div&gt;
   );
 }</code></pre>
@@ -312,9 +307,7 @@
                 <div class="box">0</div> → Click → <div class="box">1</div>
             </div>
 
-            <div class="takeaway">
-                Takeaway: Prefer `setX(prev => ...)` to avoid stale closures.
-            </div>
+
         </section>
 
         <section id="useeffect">
@@ -341,17 +334,12 @@
   <span class="keyword">return</span> &lt;h1&gt;{user.name}&lt;/h1&gt;;
 }</code></pre>
 
-            <div class="visual-example">
-                <p>Effect Lifecycle</p>
-                <div class="box">Mount → Run</div> → Dep change → <div class="box">Cleanup+Rerun</div> → Unmount → <div
-                    class="box">Cleanup</div>
-            </div>
 
-            
+
         </section>
 
         <section id="router">
-            <h2>4. React Router v7 (2026 — Declarative Mode)</h2>
+            <h2>4. React Router v7</h2>
             <p>Client-side routing for SPAs. v7 (non-breaking from v6) adds better types, React 19 support, framework
                 bridging.</p>
 

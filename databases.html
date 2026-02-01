@@ -1,0 +1,465 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases: Relational vs Non-Relational (2026 Beginner Guide)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.78);
+            --text: #f1f5f9;
+            --accent: #22d3ee;
+            --react-blue: #61dafb;
+            --code-bg: #0d1117;
+            --warning: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        nav {
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.96);
+            padding: 2.5rem 1.8rem;
+            position: fixed;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            overflow-y: auto;
+        }
+
+        nav h2 {
+            font-size: 1rem;
+            letter-spacing: 1.8px;
+            margin-bottom: 2.2rem;
+            color: var(--accent);
+            opacity: 0.85;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.97rem;
+            display: block;
+            padding: 0.7rem 0;
+            transition: all 0.22s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        main {
+            margin-left: 280px;
+            padding: 5rem 4rem;
+            max-width: 1180px;
+        }
+
+        header {
+            margin-bottom: 6rem;
+            padding-left: 2.2rem;
+            border-left: 6px solid var(--react-blue);
+        }
+
+        h1 {
+            font-size: 3.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 span {
+            color: var(--secondary);
+        }
+
+        section {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            padding: 3.2rem;
+            border-radius: 1.6rem;
+            margin-bottom: 5rem;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            color: var(--react-blue);
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h3 {
+            color: var(--primary);
+            font-size: 1.55rem;
+            margin: 2.4rem 0 1.2rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 14px;
+        }
+
+        .warning,
+        .takeaway,
+        .tip {
+            padding: 1.1rem 1.4rem;
+            border-radius: 10px;
+            margin: 1.4rem 0;
+            font-size: 0.96rem;
+        }
+
+        .warning {
+            background: rgba(248, 113, 113, 0.12);
+            border-left: 4px solid var(--warning);
+        }
+
+        .takeaway {
+            background: rgba(34, 211, 238, 0.14);
+            border-left: 4px solid var(--accent);
+        }
+
+        .tip {
+            background: rgba(236, 72, 153, 0.12);
+            border-left: 4px solid var(--secondary);
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1.6rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            margin: 1.4rem 0;
+        }
+
+        .comment {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .keyword {
+            color: #f472b6;
+        }
+
+        .type {
+            color: #3178c6;
+        }
+
+        .string {
+            color: #4ade80;
+        }
+
+        .func {
+            color: #fbbf24;
+        }
+
+        .visual-example {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .visual-example .box {
+            display: inline-block;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--text);
+            border-radius: 0.5rem;
+            margin: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.4rem 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        table th {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ul.checklist {
+            list-style: none;
+            margin: 1.4rem 0;
+        }
+
+        ul.checklist li {
+            margin-bottom: 0.9rem;
+            position: relative;
+            padding-left: 2.2rem;
+        }
+
+        ul.checklist li::before {
+            content: "→";
+            color: var(--react-blue);
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 960px) {
+            nav {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2> TOPICS</h2>
+        <ul>
+            <li><a href="#overview">1. Overview for Beginners</a></li>
+            <li><a href="#relational">2. Relational Databases (MySQL)</a></li>
+            <li><a href="#nonrelational">3. Non-Relational (MongoDB)</a></li>
+            <li><a href="#comparison">4. Comparison</a></li>
+            <li><a href="#best">5. Best Practices 2026</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Databases: Relational <span>vs Non-Relational</span></h1>
+            <p style="font-size:1.2rem; opacity:0.9; max-width:620px;">
+                Beginner guide to MySQL & MongoDB in 2026.<br>
+                With examples, queries, relations, and best practices.
+            </p>
+        </header>
+
+        <section id="overview">
+            <h2>1. Overview for Beginners</h2>
+            <p>Databases store and manage data. Relational (SQL) use tables with fixed schemas; non-relational (NoSQL)
+                are flexible for unstructured data.</p>
+
+            <h3>Key Basics</h3>
+            <ul class="checklist">
+                <li>Data is organized in collections (NoSQL) or tables (SQL).</li>
+                <li>ACID (Atomicity, Consistency, Isolation, Durability) for transactions in relational.</li>
+                <li>BASE (Basically Available, Soft state, Eventual consistency) for many NoSQL.</li>
+                <li>Choose based on data structure: Structured → Relational; Flexible/Scalable → Non-Relational.</li>
+            </ul>
+
+            <div class="tip">
+                Tip: Start with relational if you're new — it teaches structure.
+            </div>
+        </section>
+
+        <section id="relational">
+            <h2>2. Relational Databases (MySQL Example)</h2>
+            <p>MySQL is open-source, ACID-compliant, uses SQL. Great for transactions, e-commerce, banking. In 2026,
+                MySQL 9.x emphasizes performance & cloud integration.</p>
+
+            <h3>Key Concepts for Beginners</h3>
+            <ul class="checklist">
+                <li>Tables: Rows (records) & columns (fields) with fixed schema.</li>
+                <li>Primary Keys: Unique ID per row.</li>
+                <li>Foreign Keys: Link tables (relations).</li>
+                <li>Joins: Combine data from multiple tables.</li>
+            </ul>
+
+            <h3>Example Schema: Users & Orders</h3>
+            <pre><code><span class="comment">-- Create Users Table</span>
+<span class="keyword">CREATE TABLE</span> users (
+  id <span class="type">INT</span> AUTO_INCREMENT <span class="keyword">PRIMARY KEY</span>,
+  name <span class="type">VARCHAR</span>(255) <span class="keyword">NOT NULL</span>,
+  email <span class="type">VARCHAR</span>(255) UNIQUE
+);
+
+<span class="comment">-- Create Orders Table (Relation via Foreign Key)</span>
+<span class="keyword">CREATE TABLE</span> orders (
+  id <span class="type">INT</span> AUTO_INCREMENT <span class="keyword">PRIMARY KEY</span>,
+  user_id <span class="type">INT</span>,
+  product <span class="type">VARCHAR</span>(255),
+  amount <span class="type">DECIMAL</span>(10,2),
+  <span class="keyword">FOREIGN KEY</span> (user_id) <span class="keyword">REFERENCES</span> users(id)
+);</code></pre>
+
+            <h3>Example Queries</h3>
+            <pre><code><span class="comment">-- Insert Data</span>
+<span class="keyword">INSERT INTO</span> users (name, email) <span class="keyword">VALUES</span> (<span class="string">'Alice'</span>, <span class="string">'alice@email.com'</span>);
+<span class="keyword">INSERT INTO</span> orders (user_id, product, amount) <span class="keyword">VALUES</span> (1, <span class="string">'Book'</span>, 19.99);
+
+<span class="comment">-- Select with Join</span>
+<span class="keyword">SELECT</span> u.name, o.product, o.amount
+<span class="keyword">FROM</span> users u
+<span class="keyword">INNER JOIN</span> orders o <span class="keyword">ON</span> u.id = o.user_id;
+
+<span class="comment">-- Update</span>
+<span class="keyword">UPDATE</span> orders <span class="keyword">SET</span> amount = 24.99 <span class="keyword">WHERE</span> id = 1;
+
+<span class="comment">-- Delete</span>
+<span class="keyword">DELETE FROM</span> orders <span class="keyword">WHERE</span> id = 1;</code></pre>
+
+            <div class="visual-example">
+                <p>Visual: Relational Schema</p>
+                <div class="box">Users Table (id, name, email)</div> → Foreign Key → <div class="box">Orders Table (id,
+                    user_id, product, amount)</div>
+            </div>
+
+            <div class="warning">
+                Warning: Always use transactions for multi-step ops: BEGIN; ... COMMIT; or ROLLBACK;
+            </div>
+        </section>
+
+        <section id="nonrelational">
+            <h2>3. Non-Relational Databases (MongoDB Example)</h2>
+            <p>MongoDB is document-based NoSQL, stores JSON-like docs. Flexible schema.</p>
+
+            <h3>Key Concepts</h3>
+            <ul class="checklist">
+                <li>Collections: Groups of documents (like tables, but flexible).</li>
+                <li>Documents: JSON objects, no fixed schema.</li>
+                <li>Embedded Data: Nest related data (denormalized).</li>
+                <li>Aggregation: Pipeline for complex queries.</li>
+                <li>Sharding: Distribute data for scale.</li>
+            </ul>
+
+            <h3>Example Schema: Users & Orders (Embedded)</h3>
+            <pre><code><span class="comment">// Users Collection Document Example</span>
+{
+  "_id": ObjectId("65b..."),
+  "name": "Alice",
+  "email": "alice@email.com",
+  "orders": [
+    {
+      "product": "Book",
+      "amount": 19.99
+    }
+  ]
+}</code></pre>
+
+            <h3>Example Queries (MongoDB Shell/JS)</h3>
+            <pre><code><span class="comment">// Insert Document</span>
+db.users.<span class="func">insertOne</span>({
+  name: <span class="string">"Alice"</span>,
+  email: <span class="string">"alice@email.com"</span>,
+  orders: [{ product: <span class="string">"Book"</span>, amount: 19.99 }]
+});
+
+<span class="comment">// Find</span>
+db.users.<span class="func">find</span>({ name: <span class="string">"Alice"</span> }).pretty();
+
+<span class="comment">// Update (Add Order)</span>
+db.users.<span class="func">updateOne</span>(
+  { name: <span class="string">"Alice"</span> },
+  { $push: { orders: { product: <span class="string">"Pen"</span>, amount: 4.99 } } }
+);
+
+<span class="comment">// Delete Order (Pull from Array)</span>
+db.users.<span class="func">updateOne</span>(
+  { name: <span class="string">"Alice"</span> },
+  { $pull: { orders: { product: <span class="string">"Book"</span> } } }
+);</code></pre>
+
+            <div class="visual-example">
+                <p>Visual: Non-Relational Document</p>
+                <div class="box">Users Collection</div> → <div class="box">Document {name, email, orders: [{}]}</div>
+            </div>
+
+
+        </section>
+
+        <section id="comparison">
+            <h2>4. Comparison: MySQL vs MongoDB</h2>
+            <p>Choose MySQL for structured data & relations; MongoDB for flexibility & scale.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>MySQL (Relational)</th>
+                        <th>MongoDB (Non-Relational)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data Model</td>
+                        <td>Tables, rows, columns (fixed schema)</td>
+                        <td>Documents (JSON-like, flexible)</td>
+                    </tr>
+                    <tr>
+                        <td>Relations</td>
+                        <td>Foreign keys, joins</td>
+                        <td>Embedded docs </td>
+                    </tr>
+                    <tr>
+                        <td>Queries</td>
+                        <td>SQL (structured)</td>
+                        <td>MQL (query objects, aggregation)</td>
+                    </tr>
+
+                    <tr>
+                        <td>Use Cases</td>
+                        <td>Transactions, reports, e-commerce</td>
+                        <td>Big data, real-time, content mgmt</td>
+                    </tr>
+                    <tr>
+                        <td>Consistency</td>
+                        <td>Strong (ACID)</td>
+                        <td>Eventual (BASE), tunable</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="takeaway">
+                Takeaway: Hybrid approaches (e.g., MySQL + MongoDB) common in 2026 for complex apps.
+            </div>
+        </section>
+
+        <section id="best">
+            <h2>5. Best Practices in 2026</h2>
+            <ul class="checklist">
+                <li><strong>Security</strong>: Use prepared statements (MySQL) or validators (Mongo) to prevent
+                    injections.</li>
+                <li><strong>Indexing</strong>: Index frequently queried fields — crucial for perf in both.</li>
+                <li><strong>Backups</strong>: Automated daily backups + point-in-time recovery (cloud tools like AWS
+                    RDS).</li>
+                <li><strong>Schema Design</strong>: Normalize in relational (avoid redundancy); denormalize in NoSQL for
+                    speed.</li>
+
+            </ul>
+
+            <div class="warning">
+                Warning: Avoid schema changes in production without migrations.
+            </div>
+
+            <div class="takeaway">
+                These foundations let you build reliable apps. Practice with sample data sets!
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
