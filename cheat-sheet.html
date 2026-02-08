@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backend REST API Projects – Real World Practice</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --text: #f1f5f9;
+            --accent: #22d3ee;
+            --code-bg: #0d1117;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        nav {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            background: rgba(15, 23, 42, 0.96);
+            padding: 2.5rem 1.8rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            overflow-y: auto;
+        }
+
+        nav h2 {
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        nav a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        main {
+            margin-left: 280px;
+            padding: 5rem 4rem;
+            max-width: 1200px;
+        }
+
+        header {
+            border-left: 6px solid var(--primary);
+            padding-left: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+        }
+
+        h1 span {
+            color: var(--secondary);
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 1.6rem;
+            margin-bottom: 4.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.4rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1.4rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            margin: 1.2rem 0;
+        }
+
+        .note {
+            background: rgba(34, 211, 238, 0.12);
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.3rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 960px) {
+            nav {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>PROJECTS</h2>
+        <a href="#rules">Global Rules</a>
+        <a href="#booking">1. Booking</a>
+        <a href="#ecommerce">2. E-Commerce</a>
+        <a href="#subscription">3. Subscriptions</a>
+        <a href="#events">4. Events</a>
+        <a href="#jobs">5. Jobs</a>
+        <a href="#restaurant">6. Restaurant</a>
+        <a href="#blog">7. Blog</a>
+        <a href="#students">8. Students</a>
+        <a href="#tickets">9. Tickets</a>
+        <a href="#global-filtering">NOTE: Global Filtering, Pagination & Sorting (Applies to ALL APIs)</a>
+    </nav>
+
+    <main>
+
+        <header>
+            <h1>Backend REST API <span>Projects</span></h1>
+            <p style="max-width:650px; opacity:0.9; font-size:1.15rem;">
+                Build real backend systems using CRUD, relations, filtering, pagination, and clean API design.
+            </p>
+        </header>
+
+        <section id="rules">
+            <h2>Global Rules (Important)</h2>
+
+            <div class="note">
+                You must first create base entities using CRUD APIs, then use their IDs in business APIs.
+                Everything must be done via HTTP requests.
+            </div>
+
+            <pre><code>1. Create main entities (users, products, courses, etc.)
+2. Save returned IDs
+3. Use IDs in business APIs (orders, bookings, tickets...)
+4. No manual database inserts</code></pre>
+        </section>
+
+
+
+        <!-- 1. Booking -->
+        <section id="booking">
+            <h2>1. Booking System (Hotel / Clinic)</h2>
+
+            <h3>Core CRUD – Users</h3>
+            <pre><code>POST   /api/users
+GET    /api/users
+GET    /api/users/:id
+PUT    /api/users/:id
+DELETE /api/users/:id</code></pre>
+
+            <h3>Business CRUD – Bookings</h3>
+            <pre><code>POST   /api/bookings
+GET    /api/bookings
+GET    /api/bookings/:id
+PUT    /api/bookings/:id
+DELETE /api/bookings/:id</code></pre>
+        </section>
+
+        <!-- 2. E-Commerce -->
+        <section id="ecommerce">
+            <h2>2. E-Commerce Backend</h2>
+
+            <h3>Core CRUD – Users & Products</h3>
+            <pre><code>POST /api/users
+POST /api/products
+GET  /api/products/:id
+PUT  /api/products/:id
+DELETE /api/products/:id</code></pre>
+
+            <h3>Business CRUD – Orders</h3>
+            <pre><code>POST   /api/orders
+GET    /api/orders
+GET    /api/orders/:id
+PUT    /api/orders/:id
+DELETE /api/orders/:id</code></pre>
+        </section>
+
+        <!-- 3. Subscriptions -->
+        <section id="subscription">
+            <h2>3. Subscription Management</h2>
+
+            <h3>Core CRUD – Users & Plans</h3>
+            <pre><code>POST /api/users
+POST /api/plans
+GET  /api/plans/:id
+PUT  /api/plans/:id
+DELETE /api/plans/:id</code></pre>
+
+            <h3>Business CRUD – Subscriptions</h3>
+            <pre><code>POST   /api/subscriptions
+GET    /api/subscriptions
+GET    /api/subscriptions/:id
+PUT    /api/subscriptions/:id
+DELETE /api/subscriptions/:id</code></pre>
+        </section>
+
+        <!-- 4. Events -->
+        <section id="events">
+            <h2>4. Event Management</h2>
+
+            <h3>Core CRUD – Users & Events</h3>
+            <pre><code>POST /api/users
+POST /api/events
+GET  /api/events/:id
+PUT  /api/events/:id
+DELETE /api/events/:id</code></pre>
+
+            <h3>Business CRUD – Registrations</h3>
+            <pre><code>POST   /api/registrations
+GET    /api/registrations
+GET    /api/registrations/:id
+PUT    /api/registrations/:id
+DELETE /api/registrations/:id</code></pre>
+        </section>
+
+        <!-- 5. Jobs -->
+        <section id="jobs">
+            <h2>5. Job Portal</h2>
+
+            <h3>Core CRUD – Users & Jobs</h3>
+            <pre><code>POST /api/users
+POST /api/jobs
+GET  /api/jobs/:id
+PUT  /api/jobs/:id
+DELETE /api/jobs/:id</code></pre>
+
+            <h3>Business CRUD – Applications</h3>
+            <pre><code>POST   /api/applications
+GET    /api/applications
+GET    /api/applications/:id
+PUT    /api/applications/:id
+DELETE /api/applications/:id</code></pre>
+        </section>
+
+        <!-- 6. Restaurant -->
+        <section id="restaurant">
+            <h2>6. Restaurant Ordering</h2>
+
+            <h3>Core CRUD – Users & Menu Items</h3>
+            <pre><code>POST /api/users
+POST /api/menu-items
+GET  /api/menu-items/:id
+PUT  /api/menu-items/:id
+DELETE /api/menu-items/:id</code></pre>
+
+            <h3>Business CRUD – Orders</h3>
+            <pre><code>POST   /api/orders
+GET    /api/orders
+GET    /api/orders/:id
+PUT    /api/orders/:id
+DELETE /api/orders/:id</code></pre>
+        </section>
+
+        <!-- 7. Blog -->
+        <section id="blog">
+            <h2>7. Blog Platform</h2>
+
+            <h3>Core CRUD – Authors</h3>
+            <pre><code>POST /api/authors
+GET  /api/authors/:id
+PUT  /api/authors/:id
+DELETE /api/authors/:id</code></pre>
+
+            <h3>Business CRUD – Posts</h3>
+            <pre><code>POST   /api/posts
+GET    /api/posts
+GET    /api/posts/:id
+PUT    /api/posts/:id
+DELETE /api/posts/:id</code></pre>
+        </section>
+
+        <!-- 8. Students -->
+        <section id="students">
+            <h2>8. Student Management</h2>
+
+            <h3>Core CRUD – Students & Courses</h3>
+            <pre><code>POST /api/students
+POST /api/courses
+GET  /api/courses/:id
+PUT  /api/courses/:id
+DELETE /api/courses/:id</code></pre>
+
+            <h3>Business CRUD – Enrollments</h3>
+            <pre><code>POST   /api/enrollments
+GET    /api/enrollments
+GET    /api/enrollments/:id
+PUT    /api/enrollments/:id
+DELETE /api/enrollments/:id</code></pre>
+        </section>
+
+        <!-- 9. Tickets -->
+        <section id="tickets">
+            <h2>9. Ticket Support System</h2>
+
+            <h3>Core CRUD – Users</h3>
+            <pre><code>POST   /api/users
+GET    /api/users/:id
+PUT    /api/users/:id
+DELETE /api/users/:id</code></pre>
+
+            <h3>Business CRUD – Tickets</h3>
+            <pre><code>POST   /api/tickets
+GET    /api/tickets
+GET    /api/tickets/:id
+PUT    /api/tickets/:id
+DELETE /api/tickets/:id</code></pre>
+        </section>
+
+        <section id="global-filtering">
+            <h2>NOTE: Global Filtering, Pagination & Sorting (Applies to ALL APIs)</h2>
+
+            <p>
+                Any API endpoint that returns a <strong>list of items</strong> must support
+                filtering, pagination, and sorting using query parameters.
+                This rule applies to <strong>all projects and all main entities</strong>.
+            </p>
+
+            <div class="takeaway">
+                This logic is implemented once and reused across all controllers.
+                No frontend logic is involved — everything is handled by backend APIs.
+            </div>
+
+            <h3>Applies To</h3>
+            <pre><code>
+GET /api/bookings
+GET /api/orders
+GET /api/tickets
+GET /api/posts
+GET /api/students
+GET /api/users
+</code></pre>
+
+            <h3>Filtering</h3>
+            <p>
+                Any field in the model can be used as a filter using query parameters.
+            </p>
+
+            <pre><code>
+GET /api/bookings?status=confirmed
+GET /api/orders?userId=65fa123abc
+GET /api/tickets?priority=high
+GET /api/posts?authorId=65fa999xyz
+</code></pre>
+
+            <h3>Pagination (Required)</h3>
+            <p>
+                Pagination must be supported on all list endpoints.
+            </p>
+
+            <pre><code>
+?page=1&limit=10
+</code></pre>
+
+            <pre><code>
+GET /api/bookings?page=2&limit=5
+</code></pre>
+
+            <div class="takeaway">
+                Default values if not provided:
+                <br>
+                <code>page = 1</code> &nbsp; | &nbsp; <code>limit = 10</code>
+            </div>
+
+            <h3>Sorting</h3>
+            <p>
+                Sorting is optional and controlled using query parameters.
+            </p>
+
+            <pre><code>
+?sort=createdAt&order=desc
+</code></pre>
+
+            <pre><code>
+GET /api/orders?sort=createdAt&order=asc
+GET /api/bookings?sort=startDate&order=desc
+</code></pre>
+
+            <div class="takeaway">
+                Default sorting:
+                <br>
+                <code>sort = createdAt</code> &nbsp; | &nbsp; <code>order = desc</code>
+            </div>
+
+            <h3>Combined Example (Real-Life)</h3>
+            <pre><code>
+GET /api/orders?
+status=delivered
+&userId=65fa123abc
+&page=1
+&limit=5
+&sort=createdAt
+&order=desc
+</code></pre>
+
+            <div class="warning">
+                Do NOT create separate endpoints for filtering or pagination.
+                <br>
+                Everything must be handled using query parameters on the main GET endpoint.
+            </div>
+        </section>
+
+
+    </main>
+
+</body>
+
+</html>
