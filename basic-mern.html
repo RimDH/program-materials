@@ -1,287 +1,287 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MERN Stack - Beginner Guide </title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6366f1;
-            --secondary: #ec4899;
-            --bg: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.78);
-            --text: #f1f5f9;
-            --accent: #22d3ee;
-            --react-blue: #61dafb;
-            --code-bg: #0d1117;
-            --warning: #f87171;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MERN Stack Basics - Beginner Guide </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #ec4899;
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.78);
+      --text: #f1f5f9;
+      --accent: #22d3ee;
+      --react-blue: #61dafb;
+      --code-bg: #0d1117;
+      --warning: #f87171;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
-            color: var(--text);
-            line-height: 1.65;
-        }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+      color: var(--text);
+      line-height: 1.65;
+    }
 
-        nav {
-            width: 280px;
-            height: 100vh;
-            background: rgba(15, 23, 42, 0.96);
-            padding: 2.5rem 1.8rem;
-            position: fixed;
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
-            overflow-y: auto;
-        }
+    nav {
+      width: 280px;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.96);
+      padding: 2.5rem 1.8rem;
+      position: fixed;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      overflow-y: auto;
+    }
 
-        nav h2 {
-            font-size: 1rem;
-            letter-spacing: 1.8px;
-            margin-bottom: 2.2rem;
-            color: var(--accent);
-            opacity: 0.85;
-        }
+    nav h2 {
+      font-size: 1rem;
+      letter-spacing: 1.8px;
+      margin-bottom: 2.2rem;
+      color: var(--accent);
+      opacity: 0.85;
+    }
 
-        nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.97rem;
-            display: block;
-            padding: 0.7rem 0;
-            transition: all 0.22s;
-        }
+    nav a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.97rem;
+      display: block;
+      padding: 0.7rem 0;
+      transition: all 0.22s;
+    }
 
-        nav a:hover {
-            color: var(--accent);
-            padding-left: 8px;
-        }
+    nav a:hover {
+      color: var(--accent);
+      padding-left: 8px;
+    }
 
-        main {
-            margin-left: 280px;
-            padding: 5rem 4rem;
-            max-width: 1180px;
-        }
+    main {
+      margin-left: 280px;
+      padding: 5rem 4rem;
+      max-width: 1180px;
+    }
 
-        header {
-            margin-bottom: 6rem;
-            padding-left: 2.2rem;
-            border-left: 6px solid var(--react-blue);
-        }
+    header {
+      margin-bottom: 6rem;
+      padding-left: 2.2rem;
+      border-left: 6px solid var(--react-blue);
+    }
 
-        h1 {
-            font-size: 3.4rem;
-            margin-bottom: 0.8rem;
-        }
+    h1 {
+      font-size: 3.4rem;
+      margin-bottom: 0.8rem;
+    }
 
-        h1 span {
-            color: var(--secondary);
-        }
+    h1 span {
+      color: var(--secondary);
+    }
 
-        section {
-            background: var(--card-bg);
-            backdrop-filter: blur(14px);
-            padding: 3.2rem;
-            border-radius: 1.6rem;
-            margin-bottom: 5rem;
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
-        }
+    section {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      padding: 3.2rem;
+      border-radius: 1.6rem;
+      margin-bottom: 5rem;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+    }
 
-        h2 {
-            font-size: 2.4rem;
-            color: var(--react-blue);
-            margin-bottom: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+    h2 {
+      font-size: 2.4rem;
+      color: var(--react-blue);
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
 
-        h3 {
-            color: var(--primary);
-            font-size: 1.55rem;
-            margin: 2.4rem 0 1.2rem;
-            border-left: 4px solid var(--primary);
-            padding-left: 14px;
-        }
+    h3 {
+      color: var(--primary);
+      font-size: 1.55rem;
+      margin: 2.4rem 0 1.2rem;
+      border-left: 4px solid var(--primary);
+      padding-left: 14px;
+    }
 
-        .warning,
-        .takeaway,
-        .tip {
-            padding: 1.1rem 1.4rem;
-            border-radius: 10px;
-            margin: 1.4rem 0;
-            font-size: 0.96rem;
-        }
+    .warning,
+    .takeaway,
+    .tip {
+      padding: 1.1rem 1.4rem;
+      border-radius: 10px;
+      margin: 1.4rem 0;
+      font-size: 0.96rem;
+    }
 
-        .warning {
-            background: rgba(248, 113, 113, 0.12);
-            border-left: 4px solid var(--warning);
-        }
+    .warning {
+      background: rgba(248, 113, 113, 0.12);
+      border-left: 4px solid var(--warning);
+    }
 
-        .takeaway {
-            background: rgba(34, 211, 238, 0.14);
-            border-left: 4px solid var(--accent);
-        }
+    .takeaway {
+      background: rgba(34, 211, 238, 0.14);
+      border-left: 4px solid var(--accent);
+    }
 
-        .tip {
-            background: rgba(236, 72, 153, 0.12);
-            border-left: 4px solid var(--secondary);
-        }
+    .tip {
+      background: rgba(236, 72, 153, 0.12);
+      border-left: 4px solid var(--secondary);
+    }
 
-        pre {
-            background: var(--code-bg);
-            padding: 1.6rem;
-            border-radius: 1rem;
-            overflow-x: auto;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            margin: 1.4rem 0;
-        }
+    pre {
+      background: var(--code-bg);
+      padding: 1.6rem;
+      border-radius: 1rem;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin: 1.4rem 0;
+    }
 
-        .comment {
-            color: #64748b;
-            font-style: italic;
-        }
+    .comment {
+      color: #64748b;
+      font-style: italic;
+    }
 
-        .keyword {
-            color: #f472b6;
-        }
+    .keyword {
+      color: #f472b6;
+    }
 
-        .string {
-            color: #4ade80;
-        }
+    .string {
+      color: #4ade80;
+    }
 
-        .visual-example {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 1rem;
-            text-align: center;
-        }
+    .visual-example {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 1rem;
+      text-align: center;
+    }
 
-        .visual-example .box {
-            display: inline-block;
-            padding: 1rem;
-            background: var(--primary);
-            color: var(--text);
-            border-radius: 0.5rem;
-            margin: 0.5rem;
-        }
+    .visual-example .box {
+      display: inline-block;
+      padding: 1rem;
+      background: var(--primary);
+      color: var(--text);
+      border-radius: 0.5rem;
+      margin: 0.5rem;
+    }
 
-        ul.checklist {
-            list-style: none;
-            margin: 1.4rem 0;
-        }
+    ul.checklist {
+      list-style: none;
+      margin: 1.4rem 0;
+    }
 
-        ul.checklist li {
-            margin-bottom: 0.9rem;
-            position: relative;
-            padding-left: 2.2rem;
-        }
+    ul.checklist li {
+      margin-bottom: 0.9rem;
+      position: relative;
+      padding-left: 2.2rem;
+    }
 
-        ul.checklist li::before {
-            content: "→";
-            color: var(--react-blue);
-            position: absolute;
-            left: 0;
-        }
+    ul.checklist li::before {
+      content: "→";
+      color: var(--react-blue);
+      position: absolute;
+      left: 0;
+    }
 
-        @media (max-width: 960px) {
-            nav {
-                display: none;
-            }
+    @media (max-width: 960px) {
+      nav {
+        display: none;
+      }
 
-            main {
-                margin-left: 0;
-                padding: 3rem 2rem;
-            }
-        }
-    </style>
+      main {
+        margin-left: 0;
+        padding: 3rem 2rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <nav>
-        <h2>MERN STACK (20 Slides)</h2>
-        <ul>
-            <li><a href="#s1">1. Welcome to MERN</a></li>
-            <li><a href="#s2">2. What is MERN?</a></li>
-            <li><a href="#s3">3. How MERN Works (Flow)</a></li>
-            <li><a href="#s4">4. Backend Folder Structure</a></li>
-            <li><a href="#s5">5. Start Backend Project</a></li>
-            <li><a href="#s6">6. Connect MongoDB</a></li>
-            <li><a href="#s7">7. Create User Model</a></li>
-            <li><a href="#s8">8. What is Middleware?</a></li>
-            <li><a href="#s9">9. JWT Login (Backend)</a></li>
-            <li><a href="#s10">10. Simple CRUD (Products)</a></li>
-            <li><a href="#s11">11. Upload Images (multer)</a></li>
-            <li><a href="#s12">12. Frontend Folder Structure</a></li>
-            <li><a href="#s13">13. Start React Project</a></li>
-            <li><a href="#s14">14. Call APIs in React</a></li>
-            <li><a href="#s15">15. Login Page in React</a></li>
-            <li><a href="#s16">16. Keep Logged In (localStorage)</a></li>
-            <li><a href="#s17">17. Protected Routes & Dashboard</a></li>
-            <li><a href="#s18">18. Role-Based Dashboard (Admin/User)</a></li>
-            <li><a href="#s19">19. Frontend CRUD Example</a></li>
-            <li><a href="#s20">20. Tips & Next Steps</a></li>
-        </ul>
-    </nav>
+  <nav>
+    <h2>MERN STACK BASICS</h2>
+    <ul>
+      <li><a href="#s1">1. Welcome to MERN</a></li>
+      <li><a href="#s2">2. What is MERN?</a></li>
+      <li><a href="#s3">3. How MERN Works (Flow)</a></li>
+      <li><a href="#s4">4. Backend Folder Structure</a></li>
+      <li><a href="#s5">5. Start Backend Project</a></li>
+      <li><a href="#s6">6. Connect MongoDB</a></li>
+      <li><a href="#s7">7. Create User Model</a></li>
+      <li><a href="#s8">8. What is Middleware?</a></li>
+      <li><a href="#s9">9. JWT Login (Backend)</a></li>
+      <li><a href="#s10">10. Simple CRUD (Products)</a></li>
+      <li><a href="#s11">11. Upload Images (multer)</a></li>
+      <li><a href="#s12">12. Frontend Folder Structure</a></li>
+      <li><a href="#s13">13. Start React Project</a></li>
+      <li><a href="#s14">14. Call APIs in React</a></li>
+      <li><a href="#s15">15. Login Page in React</a></li>
+      <li><a href="#s16">16. Keep Logged In (localStorage)</a></li>
+      <li><a href="#s17">17. Protected Routes & Dashboard</a></li>
+      <li><a href="#s18">18. Role-Based Dashboard (Admin/User)</a></li>
+      <li><a href="#s19">19. Frontend CRUD Example</a></li>
+      <li><a href="#s20">20. Tips & Next Steps</a></li>
+    </ul>
+  </nav>
 
-    <main>
-        <header>
-            <h1>MERN Stack <span>Beginner Guide</span></h1>
-            <p style="font-size:1.2rem; opacity:0.9; max-width:620px;">
-                Build full apps with login, roles, dashboard & image upload.
-            </p>
-        </header>
+  <main>
+    <header>
+      <h1>MERN Stack BASICS <span> Guide</span></h1>
+      <p style="font-size:1.2rem; opacity:0.9; max-width:620px;">
+        Build full apps with login, roles, dashboard & image upload.
+      </p>
+    </header>
 
-        <section id="s1">
-            <h2>1. Welcome to MERN</h2>
-            <p>MERN is the easiest way to build full websites and apps using only JavaScript.</p>
-            <ul class="checklist">
-                <li>One language for everything</li>
-                <li>Very popular in 2026</li>
-                <li>Perfect for beginners</li>
-            </ul>
+    <section id="s1">
+      <h2>1. Welcome to MERN</h2>
+      <p>MERN is the easiest way to build full websites and apps using only JavaScript.</p>
+      <ul class="checklist">
+        <li>One language for everything</li>
+        <li>Very popular in 2026</li>
+        <li>Perfect for beginners</li>
+      </ul>
 
-        </section>
+    </section>
 
-        <section id="s2">
-            <h2>2. What is MERN?</h2>
-            <ul class="checklist">
-                <li><strong>M</strong>ongoDB → save data</li>
-                <li><strong>E</strong>xpress → make backend APIs</li>
-                <li><strong>R</strong>eact → build nice pages</li>
-                <li><strong>N</strong>ode.js → run JavaScript on server</li>
-            </ul>
-            <div class="tip">You write JavaScript for frontend and backend — learn once, use everywhere.</div>
-        </section>
+    <section id="s2">
+      <h2>2. What is MERN?</h2>
+      <ul class="checklist">
+        <li><strong>M</strong>ongoDB → save data</li>
+        <li><strong>E</strong>xpress → make backend APIs</li>
+        <li><strong>R</strong>eact → build nice pages</li>
+        <li><strong>N</strong>ode.js → run JavaScript on server</li>
+      </ul>
+      <div class="tip">You write JavaScript for frontend and backend — learn once, use everywhere.</div>
+    </section>
 
-        <section id="s3">
-            <h2>3. How MERN Works (Simple Flow)</h2>
-            <div class="visual-example">
-                <div class="box">User opens browser → sees React page</div>
-                <div class="box">→ clicks "Login"</div>
-                <div class="box">→ React sends email/password to backend</div>
-                <div class="box">→ Express checks → sends token back</div>
-                <div class="box">→ React saves token → shows dashboard</div>
-            </div>
-        </section>
+    <section id="s3">
+      <h2>3. How MERN Works (Simple Flow)</h2>
+      <div class="visual-example">
+        <div class="box">User opens browser → sees React page</div>
+        <div class="box">→ clicks "Login"</div>
+        <div class="box">→ React sends email/password to backend</div>
+        <div class="box">→ Express checks → sends token back</div>
+        <div class="box">→ React saves token → shows dashboard</div>
+      </div>
+    </section>
 
-        <section id="s4">
-            <h2>4. Backend Folder Structure</h2>
-            <pre><code>backend/
+    <section id="s4">
+      <h2>4. Backend Folder Structure</h2>
+      <pre><code>backend/
 ├── src/
 │   ├── config/       # db connection
 │   ├── controllers/  # logic for each route
@@ -292,28 +292,28 @@
 │   └── server.js
 ├── .env
 └── package.json</code></pre>
-            <div class="tip">Keep things organized — easy to find code later.</div>
-        </section>
+      <div class="tip">Keep things organized — easy to find code later.</div>
+    </section>
 
-        <section id="s5">
-            <h2>5. Start Backend Project</h2>
-            <pre><code>mkdir backend
+    <section id="s5">
+      <h2>5. Start Backend Project</h2>
+      <pre><code>mkdir backend
 cd backend
 npm init -y
 npm install express mongoose dotenv jsonwebtoken bcryptjs multer cors
 npm install -D nodemon</code></pre>
-            <p>Add to package.json scripts:</p>
-            <pre><code>"scripts": {
+      <p>Add to package.json scripts:</p>
+      <pre><code>"scripts": {
   "dev": "nodemon server.js"
 }</code></pre>
-        </section>
+    </section>
 
-        <section id="s6">
-            <h2>6. Connect MongoDB</h2>
-            <pre><code>// .env
+    <section id="s6">
+      <h2>6. Connect MongoDB</h2>
+      <pre><code>// .env
 MONGO_URI=mongodb://localhost:27017/myapp
 PORT=5000</code></pre>
-            <pre><code>// src/config/db.js
+      <pre><code>// src/config/db.js
 const mongoose = require('mongoose');
 const connectDB = async () => {
   try {
@@ -325,21 +325,21 @@ const connectDB = async () => {
   }
 };
 module.exports = connectDB;</code></pre>
-        </section>
+    </section>
 
-        <section id="s7">
-            <h2>7. Create User Model</h2>
-            <p>A "model" tells MongoDB what your data looks like — like a blueprint for users.</p>
+    <section id="s7">
+      <h2>7. Create User Model</h2>
+      <p>A "model" tells MongoDB what your data looks like — like a blueprint for users.</p>
 
-            <h3>Why do we need it?</h3>
-            <ul class="checklist">
-                <li>Decide what fields a user has (name, email, password)</li>
-                <li>Make sure required fields are filled</li>
-                <li>Auto-add createdAt / updatedAt times</li>
-            </ul>
+      <h3>Why do we need it?</h3>
+      <ul class="checklist">
+        <li>Decide what fields a user has (name, email, password)</li>
+        <li>Make sure required fields are filled</li>
+        <li>Auto-add createdAt / updatedAt times</li>
+      </ul>
 
-            <h3>Example: src/models/user.model.js</h3>
-            <pre><code><span class="keyword">const</span> mongoose = <span class="keyword">require</span>(<span class="string">"mongoose"</span>);
+      <h3>Example: src/models/user.model.js</h3>
+      <pre><code><span class="keyword">const</span> mongoose = <span class="keyword">require</span>(<span class="string">"mongoose"</span>);
 
 <span class="keyword">const</span> userSchema = <span class="keyword">new</span> mongoose.Schema({
   name: {
@@ -366,41 +366,41 @@ module.exports = connectDB;</code></pre>
 
 <span class="keyword">module</span>.exports = mongoose.model(<span class="string">"User"</span>, userSchema);</code></pre>
 
-            <div class="visual-example">
-                <p>Visual: User Data Example</p>
-                <div class="box">{ name: "Alice", email: "alice@example.com", role: "user" }</div>
-            </div>
+      <div class="visual-example">
+        <p>Visual: User Data Example</p>
+        <div class="box">{ name: "Alice", email: "alice@example.com", role: "user" }</div>
+      </div>
 
-            <div class="tip">
-                Tip: The "role" field will help us later show different things to normal users and admins.
-            </div>
+      <div class="tip">
+        Tip: The "role" field will help us later show different things to normal users and admins.
+      </div>
 
-            <div class="takeaway">
-                Takeaway: Models = rules for your data. Keep them simple at first — add more fields later!
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: Models = rules for your data. Keep them simple at first — add more fields later!
+      </div>
+    </section>
 
-        <section id="s8">
-            <h2>8. What is Middleware?</h2>
-            <p>Middleware is code that runs **between** the request coming in and your final controller function.</p>
+    <section id="s8">
+      <h2>8. What is Middleware?</h2>
+      <p>Middleware is code that runs **between** the request coming in and your final controller function.</p>
 
-            <h3>Simple analogy</h3>
-            <div class="visual-example">
-                <div class="box">Browser sends request</div>
-                → <div class="box">Middleware checks things</div>
-                → <div class="box">If OK → controller runs</div>
-                → <div class="box">If NOT OK → send error</div>
-            </div>
+      <h3>Simple analogy</h3>
+      <div class="visual-example">
+        <div class="box">Browser sends request</div>
+        → <div class="box">Middleware checks things</div>
+        → <div class="box">If OK → controller runs</div>
+        → <div class="box">If NOT OK → send error</div>
+      </div>
 
-            <h3>Common beginner middlewares</h3>
-            <ul class="checklist">
-                <li>express.json() → reads JSON body from forms</li>
-                <li>cors → allows React (different port) to talk to backend</li>
-                <li>auth middleware → checks if user has valid JWT token</li>
-                <li>error middleware → catches mistakes and shows nice message</li>
-            </ul>
+      <h3>Common beginner middlewares</h3>
+      <ul class="checklist">
+        <li>express.json() → reads JSON body from forms</li>
+        <li>cors → allows React (different port) to talk to backend</li>
+        <li>auth middleware → checks if user has valid JWT token</li>
+        <li>error middleware → catches mistakes and shows nice message</li>
+      </ul>
 
-            <pre><code><span class="comment">// Example: simple auth check middleware</span>
+      <pre><code><span class="comment">// Example: simple auth check middleware</span>
 <span class="keyword">const</span> protect = (req, res, next) => {
   <span class="keyword">const</span> token = req.headers.authorization?.split(<span class="string">" "</span>)[1];
 
@@ -413,31 +413,31 @@ module.exports = connectDB;</code></pre>
   next(); <span class="comment">// OK → go to controller</span>
 };</code></pre>
 
-            <div class="tip">
-                Tip: Think of middleware as security guards or helpers that run before your main code.
-            </div>
+      <div class="tip">
+        Tip: Think of middleware as security guards or helpers that run before your main code.
+      </div>
 
-            <div class="takeaway">
-                Takeaway: You will use middleware for login checks and reading JSON — very common in every MERN app.
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: You will use middleware for login checks and reading JSON — very common in every MERN app.
+      </div>
+    </section>
 
-        <section id="s9">
-            <h2>9. JWT Login (Backend)</h2>
-            <p>JWT = JSON Web Token. It's like a digital ID card the backend gives to the user after successful login.
-            </p>
+    <section id="s9">
+      <h2>9. JWT Login (Backend)</h2>
+      <p>JWT = JSON Web Token. It's like a digital ID card the backend gives to the user after successful login.
+      </p>
 
-            <h3>Simple login flow (backend side)</h3>
-            <ul class="checklist">
-                <li>User sends email + password to /api/login</li>
-                <li>Backend checks if user exists and password matches</li>
-                <li>If correct → create JWT token</li>
-                <li>Send token back to frontend</li>
-                <li>Frontend saves it and uses it for protected pages</li>
-            </ul>
+      <h3>Simple login flow (backend side)</h3>
+      <ul class="checklist">
+        <li>User sends email + password to /api/login</li>
+        <li>Backend checks if user exists and password matches</li>
+        <li>If correct → create JWT token</li>
+        <li>Send token back to frontend</li>
+        <li>Frontend saves it and uses it for protected pages</li>
+      </ul>
 
-            <h3>Example: Login route + JWT</h3>
-            <pre><code> 
+      <h3>Example: Login route + JWT</h3>
+      <pre><code> 
 router.post(<span class="string">'/login'</span>, <span class="keyword">async</span> (req, res) => {
   <span class="keyword">const</span> { email, password } = req.body;
 
@@ -457,44 +457,44 @@ router.post(<span class="string">'/login'</span>, <span class="keyword">async</s
   res.json({ token, role: user.role });
 });</code></pre>
 
-            <div class="visual-example">
-                <p>Login Success Flow</p>
-                <div class="box">Frontend → email + password</div>
-                → <div class="box">Backend → check → create token</div>
-                → <div class="box">Send { token: "xyz..." }</div>
-            </div>
+      <div class="visual-example">
+        <p>Login Success Flow</p>
+        <div class="box">Frontend → email + password</div>
+        → <div class="box">Backend → check → create token</div>
+        → <div class="box">Send { token: "xyz..." }</div>
+      </div>
 
-            <div class="warning">
-                Warning: Never hardcode secret key ("mysecretkey123") in real apps — put it in .env file!
-            </div>
+      <div class="warning">
+        Warning: Never hardcode secret key ("mysecretkey123") in real apps — put it in .env file!
+      </div>
 
-            <div class="takeaway">
-                Takeaway: After login, the frontend gets a token. It will send this token in every future request to
-                prove "I am logged in".
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: After login, the frontend gets a token. It will send this token in every future request to
+        prove "I am logged in".
+      </div>
+    </section>
 
-        <section id="s10">
-            <h2>10. Simple CRUD (Products)</h2>
-            <p>CRUD = Create, Read, Update, Delete — the 4 basic things we do with data.</p>
+    <section id="s10">
+      <h2>10. Simple CRUD (Products)</h2>
+      <p>CRUD = Create, Read, Update, Delete — the 4 basic things we do with data.</p>
 
-            <h3>Example: Products in our shop app</h3>
-            <ul class="checklist">
-                <li>Create → add new product</li>
-                <li>Read → show all products or one product</li>
-                <li>Update → edit product price or name</li>
-                <li>Delete → remove product</li>
-            </ul>
+      <h3>Example: Products in our shop app</h3>
+      <ul class="checklist">
+        <li>Create → add new product</li>
+        <li>Read → show all products or one product</li>
+        <li>Update → edit product price or name</li>
+        <li>Delete → remove product</li>
+      </ul>
 
-            <h3>Backend route example (routes/product.routes.js)</h3>
-            <pre><code>router.post('/', protect, createProduct);       // Create
+      <h3>Backend route example (routes/product.routes.js)</h3>
+      <pre><code>router.post('/', protect, createProduct);       // Create
 router.get('/', getAllProducts);                        // Read all
 router.get('/:id', getProductById);                     // Read one
 router.put('/:id', protect, updateProduct);             // Update
 router.delete('/:id', protect, deleteProduct);          // Delete</code></pre>
 
-            <h3>Controller example (createProduct)</h3>
-            <pre><code>exports.createProduct = async (req, res) => {
+      <h3>Controller example (createProduct)</h3>
+      <pre><code>exports.createProduct = async (req, res) => {
   try {
     const product = new Product({
       name: req.body.name,
@@ -509,26 +509,26 @@ router.delete('/:id', protect, deleteProduct);          // Delete</code></pre>
   }
 };</code></pre>
 
-            <div class="takeaway">
-                Takeaway: CRUD is the heart of most apps — once you know it for products, you can do it for anything
-                (users, orders, posts...).
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: CRUD is the heart of most apps — once you know it for products, you can do it for anything
+        (users, orders, posts...).
+      </div>
+    </section>
 
-        <section id="s11">
-            <h2>11. Upload Images (multer)</h2>
-            <p>Users want to upload product photos — we use a helper called **multer** to handle file uploads.</p>
+    <section id="s11">
+      <h2>11. Upload Images (multer)</h2>
+      <p>Users want to upload product photos — we use a helper called **multer** to handle file uploads.</p>
 
-            <h3>Steps (very simple)</h3>
-            <ul class="checklist">
-                <li>Install multer: `npm install multer`</li>
-                <li>Make a folder to save images: `public/uploads`</li>
-                <li>Tell multer where to save files</li>
-                <li>Add upload route</li>
-            </ul>
+      <h3>Steps (very simple)</h3>
+      <ul class="checklist">
+        <li>Install multer: `npm install multer`</li>
+        <li>Make a folder to save images: `public/uploads`</li>
+        <li>Tell multer where to save files</li>
+        <li>Add upload route</li>
+      </ul>
 
-            <h3>Example middleware + route</h3>
-            <pre><code><span class="comment">// middleware/upload.js</span>
+      <h3>Example middleware + route</h3>
+      <pre><code><span class="comment">// middleware/upload.js</span>
 <span class="keyword">const</span> multer = <span class="keyword">require</span>(<span class="string">'multer'</span>);
 <span class="keyword">const</span> storage = multer.diskStorage({
   destination: (<span class="type">req</span>, file, cb) => cb(<span class="keyword">null</span>, <span class="string">'public/uploads/'</span>),
@@ -542,26 +542,26 @@ router.post('/upload', protect, upload.single(<span class="string">'image'</span
   res.json({ imageUrl: <span class="string">`/uploads/${req.file.filename}`</span> });
 });</code></pre>
 
-            <div class="visual-example">
-                <p>Upload Flow</p>
-                <div class="box">Frontend → choose photo</div>
-                → <div class="box">Send to /api/upload</div>
-                → <div class="box">Backend saves file → returns URL</div>
-                → <div class="box">Save URL in product</div>
-            </div>
+      <div class="visual-example">
+        <p>Upload Flow</p>
+        <div class="box">Frontend → choose photo</div>
+        → <div class="box">Send to /api/upload</div>
+        → <div class="box">Backend saves file → returns URL</div>
+        → <div class="box">Save URL in product</div>
+      </div>
 
-            <div class="tip">
-                Tip: In real apps save images to cloud (Cloudinary or AWS S3) later — but local folder is perfect for
-                learning.
-            </div>
-        </section>
+      <div class="tip">
+        Tip: In real apps save images to cloud (Cloudinary or AWS S3) later — but local folder is perfect for
+        learning.
+      </div>
+    </section>
 
-        <section id="s12">
-            <h2>12. Frontend Folder Structure</h2>
-            <p>Folder layout depends on the tool you use — here are the two main ones in 2026.</p>
+    <section id="s12">
+      <h2>12. Frontend Folder Structure</h2>
+      <p>Folder layout depends on the tool you use — here are the two main ones in 2026.</p>
 
-            <h3>Option 1: Vite (recommended – faster & modern)</h3>
-            <pre><code>frontend/
+      <h3>Option 1: Vite (recommended – faster & modern)</h3>
+      <pre><code>frontend/
 ├── index.html               ← main HTML (at root!)
 ├── public/                  ← extra static files
 │   └── vite.svg
@@ -577,8 +577,8 @@ router.post('/upload', protect, upload.single(<span class="string">'image'</span
 ├── vite.config.ts
 └── package.json</code></pre>
 
-            <h3>Option 2: Create React App (older but still used)</h3>
-            <pre><code>frontend/
+      <h3>Option 2: Create React App (older but still used)</h3>
+      <pre><code>frontend/
 ├── public/
 │   ├── index.html           ← main HTML (inside public/)
 │   └── favicon.ico
@@ -590,55 +590,55 @@ router.post('/upload', protect, upload.single(<span class="string">'image'</span
 │   └── ...
 ├── package.json</code></pre>
 
-            <div class="tip">
-                Tip: Use Vite — run <code>npm create vite@latest frontend -- --template react-ts</code>. It's faster and
-                cleaner.
-            </div>
+      <div class="tip">
+        Tip: Use Vite — run <code>npm create vite@latest frontend -- --template react-ts</code>. It's faster and
+        cleaner.
+      </div>
 
 
-        </section>
+    </section>
 
-        <section id="s13">
-            <h2>13. Start React Project</h2>
-            <p>Now we switch to the frontend — the part users actually see and click.</p>
+    <section id="s13">
+      <h2>13. Start React Project</h2>
+      <p>Now we switch to the frontend — the part users actually see and click.</p>
 
-            <h3>Quick start</h3>
-            <pre><code><span class="comment">// In your main project folder (next to backend folder)</span>
+      <h3>Quick start</h3>
+      <pre><code><span class="comment">// In your main project folder (next to backend folder)</span>
 npx create-react-app frontend --template typescript
 <span class="comment">// or faster with Vite (very popular now)</span>
 npm create vite@latest frontend -- --template react-ts</code></pre>
 
-            <p>Then go inside and run:</p>
-            <pre><code>cd frontend
+      <p>Then go inside and run:</p>
+      <pre><code>cd frontend
 npm install axios react-router-dom @types/react-router-dom</code></pre>
 
-            <h3>Start the app</h3>
-            <pre><code>npm run dev   <span class="comment">// Vite</span>
+      <h3>Start the app</h3>
+      <pre><code>npm run dev   <span class="comment">// Vite</span>
 <span class="comment">// or</span>
 npm start      <span class="comment">// create-react-app</span></code></pre>
 
-            <div class="visual-example">
-                <p>What you see first</p>
-                <div class="box">Welcome to React + TypeScript</div>
-                <div class="box">→ We will replace it with Login + Dashboard</div>
-            </div>
+      <div class="visual-example">
+        <p>What you see first</p>
+        <div class="box">Welcome to React + TypeScript</div>
+        <div class="box">→ We will replace it with Login + Dashboard</div>
+      </div>
 
-            <div class="tip">
-                Tip: Use Vite if you want faster startup and modern feel. Both ways work great for beginners.
-            </div>
+      <div class="tip">
+        Tip: Use Vite if you want faster startup and modern feel. Both ways work great for beginners.
+      </div>
 
-            <div class="takeaway">
-                Takeaway: Frontend lives in its own folder. It talks to backend via (http://localhost:5000).
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: Frontend lives in its own folder. It talks to backend via (http://localhost:5000).
+      </div>
+    </section>
 
-        <section id="s14">
-            <h2>14. Call APIs in React</h2>
-            <p>React needs to talk to the backend — we use <code>fetch</code> or <code>axios</code> to send requests.
-            </p>
+    <section id="s14">
+      <h2>14. Call APIs in React</h2>
+      <p>React needs to talk to the backend — we use <code>fetch</code> or <code>axios</code> to send requests.
+      </p>
 
-            <h3>Simple example: Get all products (using fetch)</h3>
-            <pre><code><span class="comment">// src/pages/Products.tsx</span>
+      <h3>Simple example: Get all products (using fetch)</h3>
+      <pre><code><span class="comment">// src/pages/Products.tsx</span>
 <span class="keyword">import</span> { useState, useEffect } <span class="keyword">from</span> <span class="string">'react'</span>;
 
 <span class="keyword">function</span> Products() {
@@ -663,8 +663,8 @@ npm start      <span class="comment">// create-react-app</span></code></pre>
   );
 }</code></pre>
 
-            <h3>Cleaner version: Using axios</h3>
-            <pre><code><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;
+      <h3>Cleaner version: Using axios</h3>
+      <pre><code><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;
 
 useEffect(() => {
   axios.get(<span class="string">'http://localhost:5000/api/products'</span>)
@@ -672,30 +672,30 @@ useEffect(() => {
     .catch(err =&gt; console.log(err));
 }, []);</code></pre>
 
-            <div class="visual-example">
-                <p>API Call Flow</p>
-                <div class="box">React → fetch / axios → backend</div>
-                → <div class="box">Backend sends JSON data</div>
-                → <div class="box">React updates list on screen</div>
-            </div>
+      <div class="visual-example">
+        <p>API Call Flow</p>
+        <div class="box">React → fetch / axios → backend</div>
+        → <div class="box">Backend sends JSON data</div>
+        → <div class="box">React updates list on screen</div>
+      </div>
 
-            <div class="tip">
-                Tip: In real apps, put all API calls in one file like <code>src/services/api.ts</code> so you can reuse
-                them easily.
-            </div>
+      <div class="tip">
+        Tip: In real apps, put all API calls in one file like <code>src/services/api.ts</code> so you can reuse
+        them easily.
+      </div>
 
-            <div class="takeaway">
-                Takeaway: useEffect + fetch or axios = the basic way React talks to your backend. This pattern is used
-                in almost every app!
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: useEffect + fetch or axios = the basic way React talks to your backend. This pattern is used
+        in almost every app!
+      </div>
+    </section>
 
-        <section id="s15">
-            <h2>15. Login Page in React</h2>
-            <p>Simple form → user types email + password → send to backend → get token back.</p>
+    <section id="s15">
+      <h2>15. Login Page in React</h2>
+      <p>Simple form → user types email + password → send to backend → get token back.</p>
 
-            <h3>Example: Login page (src/pages/Login.tsx)</h3>
-            <pre><code><span class="comment">// src/pages/Login.tsx</span>
+      <h3>Example: Login page (src/pages/Login.tsx)</h3>
+      <pre><code><span class="comment">// src/pages/Login.tsx</span>
 <span class="keyword">import</span> { useState } <span class="keyword">from</span> <span class="string">'react'</span>;
 <span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;
 <span class="keyword">import</span> { useNavigate } <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;
@@ -740,40 +740,40 @@ useEffect(() => {
 
 <span class="keyword">export</span> <span class="keyword">default</span> Login;</code></pre>
 
-            <div class="visual-example">
-                <p>Login Success Flow</p>
-                <div class="box">User fills email + password → clicks Login</div>
-                → <div class="box">React sends data to backend</div>
-                → <div class="box">Backend says OK → token & role saved in localStorage</div>
-                → <div class="box">Redirects to dashboard</div>
-            </div>
+      <div class="visual-example">
+        <p>Login Success Flow</p>
+        <div class="box">User fills email + password → clicks Login</div>
+        → <div class="box">React sends data to backend</div>
+        → <div class="box">Backend says OK → token & role saved in localStorage</div>
+        → <div class="box">Redirects to dashboard</div>
+      </div>
 
-            <div class="tip">
-                Tip: We save the token and role in localStorage — this is a simple beginner way to stay logged in even
-                after refresh.
-            </div>
+      <div class="tip">
+        Tip: We save the token and role in localStorage — this is a simple beginner way to stay logged in even
+        after refresh.
+      </div>
 
-            <div class="takeaway">
-                Takeaway: The login page collects data → sends it to backend → saves the token → moves to dashboard.
-                This is the key step that makes the whole app feel secure and personal!
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: The login page collects data → sends it to backend → saves the token → moves to dashboard.
+        This is the key step that makes the whole app feel secure and personal!
+      </div>
+    </section>
 
-        <section id="s16">
-            <h2>16. Keep Logged In (localStorage)</h2>
-            <p>After login, we don't want the user to have to log in again every time they refresh the page or close the
-                tab.</p>
+    <section id="s16">
+      <h2>16. Keep Logged In (localStorage)</h2>
+      <p>After login, we don't want the user to have to log in again every time they refresh the page or close the
+        tab.</p>
 
-            <h3>Simple way: Save token in localStorage</h3>
-            <ul class="checklist">
-                <li>localStorage keeps data even after refreshing</li>
-                <li>We save the JWT token and user role after successful login</li>
-                <li>On every page load, check if token exists → show dashboard</li>
-                <li>If no token → show login page</li>
-            </ul>
+      <h3>Simple way: Save token in localStorage</h3>
+      <ul class="checklist">
+        <li>localStorage keeps data even after refreshing</li>
+        <li>We save the JWT token and user role after successful login</li>
+        <li>On every page load, check if token exists → show dashboard</li>
+        <li>If no token → show login page</li>
+      </ul>
 
-            <h3>Example: AuthContext with login status check (src/context/AuthContext.tsx)</h3>
-            <pre><code><span class="comment">// src/context/AuthContext.tsx (simple version)</span>
+      <h3>Example: AuthContext with login status check (src/context/AuthContext.tsx)</h3>
+      <pre><code><span class="comment">// src/context/AuthContext.tsx (simple version)</span>
 <span class="keyword">import</span> { createContext, useState, useEffect } <span class="keyword">from</span> <span class="string">'react'</span>;
 
 <span class="keyword">export</span> <span class="keyword">const</span> AuthContext = createContext();
@@ -808,40 +808,40 @@ useEffect(() => {
   );
 };</code></pre>
 
-            <div class="tip">
-                Tip: Wrap your whole app in <AuthProvider> inside index.js or main.tsx so every page can access login
-                    status:
-                    <br /><br />
-                    &lt;AuthProvider&gt;<br />
-                    &nbsp;&nbsp;&lt;App /&gt;<br />
-                    &lt;/AuthProvider&gt;
-            </div>
+      <div class="tip">
+        Tip: Wrap your whole app in <AuthProvider> inside index.js or main.tsx so every page can access login
+          status:
+          <br /><br />
+          &lt;AuthProvider&gt;<br />
+          &nbsp;&nbsp;&lt;App /&gt;<br />
+          &lt;/AuthProvider&gt;
+      </div>
 
-            <div class="takeaway">
-                Takeaway: localStorage + React Context = a simple, beginner-friendly way to keep the user logged in
-                across pages, refreshes, and even after closing the tab.
-            </div>
+      <div class="takeaway">
+        Takeaway: localStorage + React Context = a simple, beginner-friendly way to keep the user logged in
+        across pages, refreshes, and even after closing the tab.
+      </div>
 
-            <div class="warning">
-                Warning (for later): localStorage is easy but not super secure. In some apps you might use httpOnly
-                cookies for tokens — but for learning, localStorage is perfect.
-            </div>
-        </section>
+      <div class="warning">
+        Warning (for later): localStorage is easy but not super secure. In some apps you might use httpOnly
+        cookies for tokens — but for learning, localStorage is perfect.
+      </div>
+    </section>
 
-        <section id="s17">
-            <h2>17. Protected Routes & Dashboard</h2>
-            <p>Some pages (like the dashboard) should only be visible if the user is logged in. We use a special
-                component called <strong>ProtectedRoute</strong> to protect them.</p>
+    <section id="s17">
+      <h2>17. Protected Routes & Dashboard</h2>
+      <p>Some pages (like the dashboard) should only be visible if the user is logged in. We use a special
+        component called <strong>ProtectedRoute</strong> to protect them.</p>
 
-            <h3>What ProtectedRoute does</h3>
-            <ul class="checklist">
-                <li>Checks if the user is logged in (has a token from context)</li>
-                <li>If yes → shows the page</li>
-                <li>If no → redirects to the login page</li>
-            </ul>
+      <h3>What ProtectedRoute does</h3>
+      <ul class="checklist">
+        <li>Checks if the user is logged in (has a token from context)</li>
+        <li>If yes → shows the page</li>
+        <li>If no → redirects to the login page</li>
+      </ul>
 
-            <h3>ProtectedRoute Component (src/components/ProtectedRoute.tsx)</h3>
-            <pre><code><span class="keyword">import</span> { useContext } <span class="keyword">from</span> <span class="string">'react'</span>;
+      <h3>ProtectedRoute Component (src/components/ProtectedRoute.tsx)</h3>
+      <pre><code><span class="keyword">import</span> { useContext } <span class="keyword">from</span> <span class="string">'react'</span>;
 <span class="keyword">import</span> { Navigate } <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;
 <span class="keyword">import</span> { AuthContext } <span class="keyword">from</span> <span class="string">'../context/AuthContext'</span>;
 
@@ -857,8 +857,8 @@ useEffect(() => {
 
 <span class="keyword">export</span> <span class="keyword">default</span> ProtectedRoute;</code></pre>
 
-            <h3>Use it in App.tsx routes </h3>
-            <pre><code><span class="keyword">import</span> { BrowserRouter, Routes, Route } <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;
+      <h3>Use it in App.tsx routes </h3>
+      <pre><code><span class="keyword">import</span> { BrowserRouter, Routes, Route } <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;
 <span class="keyword">import</span> ProtectedRoute <span class="keyword">from</span> <span class="string">'./components/ProtectedRoute'</span>;
 <span class="keyword">import</span> Dashboard <span class="keyword">from</span> <span class="string">'./pages/Dashboard'</span>;
 <span class="keyword">import</span> Login <span class="keyword">from</span> <span class="string">'./pages/Login'</span>;
@@ -891,38 +891,38 @@ useEffect(() => {
 
 <span class="keyword">export</span> <span class="keyword">default</span> App;</code></pre>
 
-            <div class="visual-example">
-                <p>Protected Route Flow</p>
-                <div class="box">User tries /dashboard</div>
-                → <div class="box">ProtectedRoute checks: Is user logged in?</div>
-                → Yes → <div class="box">Shows Dashboard</div>
-                → No → <div class="box">Redirects to /login</div>
-            </div>
+      <div class="visual-example">
+        <p>Protected Route Flow</p>
+        <div class="box">User tries /dashboard</div>
+        → <div class="box">ProtectedRoute checks: Is user logged in?</div>
+        → Yes → <div class="box">Shows Dashboard</div>
+        → No → <div class="box">Redirects to /login</div>
+      </div>
 
-            <div class="tip">
-                Tip: The login page is **not** wrapped in ProtectedRoute — that's why everyone can see it. Private pages
-                (dashboard, profile, etc.) are wrapped.
-            </div>
+      <div class="tip">
+        Tip: The login page is **not** wrapped in ProtectedRoute — that's why everyone can see it. Private pages
+        (dashboard, profile, etc.) are wrapped.
+      </div>
 
-            <div class="takeaway">
-                Takeaway: Use <ProtectedRoute> around every private page — it's a clean, common way to protect routes in
-                    React apps.
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: Use <ProtectedRoute> around every private page — it's a clean, common way to protect routes in
+          React apps.
+      </div>
+    </section>
 
-        <section id="s18">
-            <h2>18. Role-Based Dashboard (Admin / User)</h2>
-            <p>Different users see different things: Admins see more options (like manage users), normal users see basic
-                dashboard only.</p>
+    <section id="s18">
+      <h2>18. Role-Based Dashboard (Admin / User)</h2>
+      <p>Different users see different things: Admins see more options (like manage users), normal users see basic
+        dashboard only.</p>
 
-            <h3>Simple role check</h3>
-            <ul class="checklist">
-                <li>Save role ("user" or "admin") during login (from backend)</li>
-                <li>In dashboard, show or hide buttons based on role</li>
-            </ul>
+      <h3>Simple role check</h3>
+      <ul class="checklist">
+        <li>Save role ("user" or "admin") during login (from backend)</li>
+        <li>In dashboard, show or hide buttons based on role</li>
+      </ul>
 
-            <h3>Example: Dashboard page (src/pages/Dashboard.tsx)</h3>
-            <pre><code><span class="comment">// src/pages/Dashboard.tsx</span>
+      <h3>Example: Dashboard page (src/pages/Dashboard.tsx)</h3>
+      <pre><code><span class="comment">// src/pages/Dashboard.tsx</span>
 <span class="keyword">import</span> { useContext } <span class="keyword">from</span> <span class="string">'react'</span>;
 <span class="keyword">import</span> { AuthContext } <span class="keyword">from</span> <span class="string">'../context/AuthContext'</span>;
 
@@ -948,43 +948,43 @@ useEffect(() => {
 
 <span class="keyword">export</span> <span class="keyword">default</span> Dashboard;</code></pre>
 
-            <div class="visual-example">
-                <p>Role-Based View</p>
-                <div class="box">Normal User → sees basic welcome + Logout button</div>
-                <div class="box">Admin → sees extra "Manage All Users" button</div>
-            </div>
+      <div class="visual-example">
+        <p>Role-Based View</p>
+        <div class="box">Normal User → sees basic welcome + Logout button</div>
+        <div class="box">Admin → sees extra "Manage All Users" button</div>
+      </div>
 
-            <div class="tip">
-                Tip: Use simple checks like <code>{user.role === 'admin' && ...}</code> — it's easy and perfect for
-                beginners. Add more admin features later.
-            </div>
+      <div class="tip">
+        Tip: Use simple checks like <code>{user.role === 'admin' && ...}</code> — it's easy and perfect for
+        beginners. Add more admin features later.
+      </div>
 
-            <div class="takeaway">
-                Takeaway: The role comes from the token → React uses conditional rendering to show different things to
-                admins and normal users — super useful for real apps!
-            </div>
+      <div class="takeaway">
+        Takeaway: The role comes from the token → React uses conditional rendering to show different things to
+        admins and normal users — super useful for real apps!
+      </div>
 
-            <div class="warning">
-                Warning: In real apps, never trust the frontend role alone — always double-check permissions on the
-                backend too (for security).
-            </div>
-        </section>
+      <div class="warning">
+        Warning: In real apps, never trust the frontend role alone — always double-check permissions on the
+        backend too (for security).
+      </div>
+    </section>
 
-        <section id="s19">
-            <h2>19. Frontend CRUD Example</h2>
-            <p>Now let's connect React to our backend CRUD APIs — show products, add new, edit, delete — all in one
-                page!</p>
+    <section id="s19">
+      <h2>19. Frontend CRUD Example</h2>
+      <p>Now let's connect React to our backend CRUD APIs — show products, add new, edit, delete — all in one
+        page!</p>
 
-            <h3>Simple Products page with full CRUD</h3>
-            <ul class="checklist">
-                <li>Get all products → show list</li>
-                <li>Add new product (form)</li>
-                <li>Edit product (click Edit → form fills → save)</li>
-                <li>Delete product (click Delete)</li>
-            </ul>
+      <h3>Simple Products page with full CRUD</h3>
+      <ul class="checklist">
+        <li>Get all products → show list</li>
+        <li>Add new product (form)</li>
+        <li>Edit product (click Edit → form fills → save)</li>
+        <li>Delete product (click Delete)</li>
+      </ul>
 
-            <h3>Example: Products Page (src/pages/Products.tsx)</h3>
-            <pre><code><span class="comment">// src/pages/Products.tsx</span>
+      <h3>Example: Products Page (src/pages/Products.tsx)</h3>
+      <pre><code><span class="comment">// src/pages/Products.tsx</span>
 <span class="keyword">import</span> { useState, useEffect } <span class="keyword">from</span> <span class="string">'react'</span>;
 <span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;
 
@@ -1083,38 +1083,38 @@ useEffect(() => {
 
 <span class="keyword">export</span> <span class="keyword">default</span> Products;</code></pre>
 
-            <div class="visual-example">
-                <p>Full CRUD Flow</p>
-                <div class="box">List loads → Add new → appears</div>
-                <div class="box">Click Edit → form fills → Update → list refreshes</div>
-                <div class="box">Click Delete → gone!</div>
-            </div>
+      <div class="visual-example">
+        <p>Full CRUD Flow</p>
+        <div class="box">List loads → Add new → appears</div>
+        <div class="box">Click Edit → form fills → Update → list refreshes</div>
+        <div class="box">Click Delete → gone!</div>
+      </div>
 
-            <div class="tip">
-                Tip: When editing, we reuse the same form — just change button text and fill inputs. Simple and clean!
-            </div>
+      <div class="tip">
+        Tip: When editing, we reuse the same form — just change button text and fill inputs. Simple and clean!
+      </div>
 
-            <div class="takeaway">
-                Takeaway: With useState + useEffect + axios you can build full CRUD in React — add, edit, delete, all
-                connected to your backend.
-            </div>
-        </section>
+      <div class="takeaway">
+        Takeaway: With useState + useEffect + axios you can build full CRUD in React — add, edit, delete, all
+        connected to your backend.
+      </div>
+    </section>
 
 
-        <section id="s20">
-            <h2>20. Tips & Next Steps </h2>
-            <ul class="checklist">
-                <li>Start small — build login first</li>
-                <li>Use localStorage for token (simple for beginners)</li>
-                <li>Always check if user is logged in before showing pages</li>
-                <li>Test login/logout many times</li>
-                <li>Add one feature at a time (products → images → roles)</li>
-                <li>Watch YouTube tutorials if stuck building any feature</li>
-                <li>Practice → make your own mini-shop app!</li>
-            </ul>
+    <section id="s20">
+      <h2>20. Tips & Next Steps </h2>
+      <ul class="checklist">
+        <li>Start small — build login first</li>
+        <li>Use localStorage for token (simple for beginners)</li>
+        <li>Always check if user is logged in before showing pages</li>
+        <li>Test login/logout many times</li>
+        <li>Add one feature at a time (products → images → roles)</li>
+        <li>Watch YouTube tutorials if stuck building any feature</li>
+        <li>Practice → make your own mini-shop app!</li>
+      </ul>
 
-        </section>
-    </main>
+    </section>
+  </main>
 </body>
 
 </html>
