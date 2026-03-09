@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next.js Beginner to Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-deep: #050a14;
+            --bg-slide: #0a192f;
+            --accent: #64ffda;
+            --text: #ccd6f6;
+            --text-dim: #8892b0;
+            --code: #011627;
+            --next-blue: #0070f3;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        .slide-deck {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide {
+            display: none;
+            width: 85%;
+            max-width: 1000px;
+            height: 85vh;
+            padding: 40px;
+            background: var(--bg-slide);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-top: 4px solid var(--accent);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(136, 146, 176, 0.2);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1rem;
+            margin: 15px 0 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p,
+        li {
+            color: var(--text-dim);
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        strong {
+            color: var(--accent);
+        }
+
+        pre {
+            background: var(--code);
+            padding: 15px;
+            border-radius: 6px;
+            color: #d6deeb;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            border-left: 3px solid var(--next-blue);
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .nav {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--bg-deep);
+        }
+
+        .progress {
+            color: var(--text-dim);
+            font-family: monospace;
+        }
+
+        .folder-tree {
+            color: #addbff;
+            line-height: 1.4;
+        }
+
+        .highlight-folder {
+            color: #ffdb70;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slide-deck">
+        <div class="slide active">
+            <h1 style="text-align: center; margin-top: 20vh;">Next.js</h1>
+            <p style="text-align: center;">The "Framework for React" — From Zero to Architecture</p>
+            <div style="text-align: center; margin-top: 40px;">
+                <code
+                    style="background: #111; padding: 10px 20px; border-radius: 5px; border: 1px solid var(--accent);">npx create-next-app@latest</code>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>The "Folder Way" (Routing)</h2>
+            <p>In Next.js, <strong>Folders create the URLs</strong>. You don't need a separate router file.</p>
+            <div class="grid">
+                <pre class="folder-tree">
+app/
+ ├── page.tsx      --> /
+ ├── about/
+ │   └── page.tsx  --> /about
+ └── contact/
+     └── page.tsx  --> /contact
+                </pre>
+                <div class="box">
+                    <h3>The Rule:</h3>
+                    <p>Every folder represents a path segment. To make it a real page, it <strong>must</strong> contain
+                        a <code>page.tsx</code> file.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Special File Names</h2>
+            <p>Next.js looks for these exact names to provide automatic features:</p>
+            <div class="grid">
+                <div class="box">
+                    <h3>page.tsx</h3>
+                    <p>The main content of the route. This is what the user sees.</p>
+                </div>
+                <div class="box">
+                    <h3>layout.tsx</h3>
+                    <p>Shared UI (Navbars/Footers) that doesn't re-render on navigation.</p>
+                </div>
+                <div class="box">
+                    <h3>loading.tsx</h3>
+                    <p>Shown automatically while your data is fetching. No state needed!</p>
+                </div>
+                <div class="box">
+                    <h3>error.tsx</h3>
+                    <p>A "Safety Net" that shows a custom UI if your page crashes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Dynamic Routes <code>[id]</code></h2>
+            <p>Used when you have thousands of pages with the same layout (like products or blog posts).</p>
+            <pre>
+// Folder: app/product/[id]/page.tsx
+// URL: /product/iphone-15
+
+export default function Page({ params }) {
+  return &lt;h1&gt;Product ID: {params.id}&lt;/h1&gt;
+}
+            </pre>
+            <p>The <code>[id]</code> acts as a <strong>wildcard variable</strong> in your URL.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Route Groups <code>(group)</code></h2>
+            <p>Parentheses are for <strong>Visual Organization only</strong>. They are invisible to the URL.</p>
+            <div class="grid">
+                <pre class="folder-tree">
+app/
+ ├── (auth)/
+ │   ├── login/page.tsx
+ │   └── layout.tsx  <-- Sidebar for Login
+ └── (main)/
+     ├── home/page.tsx
+     └── layout.tsx  <-- Sidebar for App
+                </pre>
+                <div class="box">
+                    <h3>Why use them?</h3>
+                    <p>1. Organize code without changing the URL (<code>/login</code> instead of
+                        <code>/auth/login</code>).<br><br>
+                        2. Give different sections of your site completely different layouts.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>The 3 Ways to Render</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <tr style="border-bottom: 1px solid #333; text-align: left;">
+                    <th style="padding: 10px;">Type</th>
+                    <th>When?</th>
+                    <th>How?</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><strong>SSG</strong></td>
+                    <td>Build Time</td>
+                    <td>Default Behavior</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><strong>SSR</strong></td>
+                    <td>Per Request</td>
+                    <td><code>cache: 'no-store'</code></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><strong>CSR</strong></td>
+                    <td>In Browser</td>
+                    <td><code>"use client"</code></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="slide">
+            <h2>Project Architecture</h2>
+            <p>A professional setup for a Website + Dashboard + API:</p>
+            <pre class="folder-tree" style="font-size: 0.7rem;">
+src/
+ ├── app/
+ │   ├── (marketing)/    <-- Home, About, Pricing
+ │   ├── (dashboard)/    <-- Protected User Panel
+ │   ├── (auth)/         <-- Login / Register
+ │   └── api/            <-- Backend Handlers (JSON)
+ ├── components/
+ │   ├── ui/             <-- Buttons, Modals
+ │   └── layout/         <-- Navbars, Sidebars
+ └── lib/                <-- Database, Auth logic
+            </pre>
+        </div>
+
+        <div class="nav">
+            <button class="btn" onclick="move(-1)">Previous</button>
+            <span class="progress"><span id="idx">1</span> / 7</span>
+            <button class="btn" onclick="move(1)">Next</button>
+        </div>
+    </div>
+
+    <script>
+        let cur = 0;
+        const slides = document.querySelectorAll('.slide');
+        const idx = document.getElementById('idx');
+
+        function move(d) {
+            slides[cur].classList.remove('active');
+            cur = (cur + d + slides.length) % slides.length;
+            slides[cur].classList.add('active');
+            idx.innerText = cur + 1;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowRight") move(1);
+            if (e.key === "ArrowLeft") move(-1);
+        });
+    </script>
+</body>
+
+</html>
