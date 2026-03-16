@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next.js Beginner to Pro</title>
+    <title>Next.js</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -106,7 +106,7 @@
             border-radius: 6px;
             color: #d6deeb;
             font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             border-left: 3px solid var(--next-blue);
             margin: 10px 0;
             overflow-x: auto;
@@ -159,8 +159,13 @@
             line-height: 1.4;
         }
 
-        .highlight-folder {
+        .tag-server {
             color: #ffdb70;
+            font-weight: bold;
+        }
+
+        .tag-client {
+            color: var(--accent);
             font-weight: bold;
         }
     </style>
@@ -170,140 +175,305 @@
 
     <div class="slide-deck">
         <div class="slide active">
-            <h1 style="text-align: center; margin-top: 20vh;">Next.js</h1>
-            <p style="text-align: center;">The "Framework for React" — From Zero to Architecture</p>
+            <h1 style="text-align: center; margin-top: 15vh;">Next.js 16</h1>
+            <p style="text-align: center;">The "Full-Stack React" Era</p>
             <div style="text-align: center; margin-top: 40px;">
-                <code
-                    style="background: #111; padding: 10px 20px; border-radius: 5px; border: 1px solid var(--accent);">npx create-next-app@latest</code>
+                <div class="box" style="display: inline-block; text-align: left;">
+                    <p><strong>What is it?</strong> A React Framework for building Full-Stack Web Apps.</p>
+                    <p><strong>The Gap:</strong> React alone is only the Frontend. Next.js is the Backend and Frontend
+                        in one.</p>
+                    <p><strong>Stable Version:</strong> v16.x (2026 Standard)</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">Built-in Routing | Optimized Rendering | Data Fetching</p>
+        </div>
+
+        <div class="slide">
+            <h2>React vs. Next.js: The Evolution</h2>
+            <div class="grid">
+                <div class="box">
+                    <h3>The Old React Way</h3>
+                    <ul>
+                        <li>Manual Routing (React Router)</li>
+                        <li>Client-side rendering only</li>
+                        <li>External API server needed</li>
+                        <li>Manual Performance setup</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h3>The Next.js Way</h3>
+                    <ul>
+                        <li><strong>Built-in</strong> File-system Routing</li>
+                        <li><strong>Hybrid</strong> Server/Client Architecture</li>
+                        <li><strong>Built-in</strong> API Handlers (Backend)</li>
+                        <li>Auto-optimized images and fonts</li>
+                    </ul>
+                </div>
+            </div>
+            <pre style="text-align: center;">npx create-next-app@latest</pre>
+        </div>
+
+        <div class="slide">
+            <h2>The App Directory Structure</h2>
+            <div class="grid">
+                <pre class="folder-tree">
+src/
+ └── app/
+     ├── layout.tsx  <-- Root Layout
+     ├── page.tsx    <-- Main Home Page
+     ├── globals.css <-- Tailwind/CSS
+     └── components/ <-- Global UI
+                </pre>
+                <div class="box">
+                    <h3>The "Layout" Principle</h3>
+                    <p>Next.js follows a <strong>Wrapper Pattern</strong>. The <code>layout.tsx</code> runs first. It
+                        contains your Navbar/Footer.</p>
+                    <p>The <code>{children}</code> are then displayed inside the layout. This allows the page to change
+                        without the Navbar re-rendering!</p>
+                </div>
             </div>
         </div>
 
         <div class="slide">
-            <h2>The "Folder Way" (Routing)</h2>
-            <p>In Next.js, <strong>Folders create the URLs</strong>. You don't need a separate router file.</p>
+            <h2>The New Architecture</h2>
+            <p>Next.js relies on <strong>React Server Components</strong>. You now choose where your code lives.
+            </p>
+
+            <div class="grid">
+                <div class="box">
+                    <h3 class="tag-server">Server Components</h3>
+                    <ul>
+                        <li><strong>Default</strong> in Next.js.</li>
+                        <li>Rendered only on the Server.</li>
+                        <li>No <code>useState</code> or <code>useEffect</code>.</li>
+                        <li>Faster: Sends less JS to the user.</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h3 class="tag-client">Client Components</h3>
+                    <ul>
+                        <li>Must use <code>"use client"</code> at top.</li>
+                        <li>Rendered on the Browser.</li>
+                        <li>Full React Hooks support.</li>
+                        <li>Interactive: Buttons, Forms, Inputs.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>The 4 Rendering Types</h2>
+            <p>Next.js is "Hybrid." You can use all four of these methods in a <strong>single application</strong>.</p>
+
+            <div class="grid-4">
+                <div class="box">
+                    <div>
+                        <span class="method-tag">Static (SSG)</span>
+                        <h3>At Build Time</h3>
+                        <p>Pre-rendered once. Fastest for users.</p>
+                        <pre>// Default behavior
+fetch('...');</pre>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Blogs</li>
+                        <li><i class="fas fa-check"></i> Docs</li>
+                    </ul>
+                </div>
+
+                <div class="box">
+                    <div>
+                        <span class="method-tag" style="background: var(--accent); color: var(--bg-deep);">Hybrid
+                            (ISR)</span>
+                        <h3>Background</h3>
+                        <p>Static, but updates every X seconds.</p>
+                        <pre>revalidate: 60</pre>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> News</li>
+                        <li><i class="fas fa-check"></i> E-commerce</li>
+                    </ul>
+                </div>
+
+                <div class="box">
+                    <div>
+                        <span class="method-tag" style="background: #ff5a5f;">Dynamic (SSR)</span>
+                        <h3>On Request</h3>
+                        <p>Fresh data for every single visitor.</p>
+                        <pre>cache: 'no-store'</pre>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Live Feeds</li>
+                        <li><i class="fas fa-check"></i> Dashboards</li>
+                    </ul>
+                </div>
+
+                <div class="box">
+                    <div>
+                        <span class="method-tag" style="background: #bc70ff;">Client (CSR)</span>
+                        <h3>In Browser</h3>
+                        <p>Runs 100% on the user's machine.</p>
+                        <pre>"use client"
+useEffect(...)</pre>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Charts</li>
+                        <li><i class="fas fa-check"></i> Modals</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box" style="margin-top: 20px; border-left: 4px solid #bc70ff;">
+                <p><strong>When to use CSR?</strong> In Next.js, we don't use CSR for the whole page (bad for SEO).
+                    Instead, we use it for <strong>interactive components</strong> like search bars, maps, or buttons
+                    that need <code>useState</code>.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>In the Code: Server vs. Client</h2>
+            <div class="grid">
+                <div>
+                    <h3>Server (Default)</h3>
+                    <pre>
+// No 'use client' here
+export default function Page() {
+  console.log("I run on the Server!");
+  // Output shows in Terminal
+  return &lt;h1&gt;Server Data&lt;/h1&gt;;
+}
+                    </pre>
+                </div>
+                <div>
+                    <h3>Client</h3>
+                    <pre>
+"use client";
+import { useState } from 'react';
+
+export default function Counter() {
+  console.log("I run in Browser!");
+  // Output shows in Inspect Console
+  return &lt;button&gt;Click Me&lt;/button&gt;;
+}
+                    </pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Routing Conventions</h2>
+            <p>Routes are folders. Content is <code>page.tsx</code>.</p>
+            <div class="grid">
+                <div class="box">
+                    <h3>Group Routing <code>( )</code></h3>
+                    <p>Folder: <code>app/(auth)/login/page.tsx</code></p>
+                    <p>URL: <code>/login</code> (Notice "auth" is hidden!)</p>
+                </div>
+                <div class="box">
+                    <h3>Dynamic Routing <code>[ ]</code></h3>
+                    <p>Folder: <code>app/blog/[slug]/page.tsx</code></p>
+                    <p>URL: <code>/blog/post-one</code></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide ">
+            <h2>The API Folder: Your Built-in Backend</h2>
+            <p>Next.js allows you to build a full API without leaving your <code>app</code> folder. No separate
+                Node/Express server required.</p>
             <div class="grid">
                 <pre class="folder-tree">
 app/
- ├── page.tsx      --> /
- ├── about/
- │   └── page.tsx  --> /about
- └── contact/
-     └── page.tsx  --> /contact
+ ├── api/
+ │   └── products/
+ │       └── route.ts  <-- The Endpoint
+ ├── layout.tsx
+ └── page.tsx
                 </pre>
                 <div class="box">
-                    <h3>The Rule:</h3>
-                    <p>Every folder represents a path segment. To make it a real page, it <strong>must</strong> contain
-                        a <code>page.tsx</code> file.</p>
+                    <h3>How it works:</h3>
+                    <p>Any <code>route.ts</code> file inside the <code>api/</code> folder becomes an HTTP endpoint.</p>
+                    <p>Folder: <code>api/products/route.ts</code></p>
+                    <p>URL: <code>/api/products</code></p>
                 </div>
             </div>
         </div>
 
         <div class="slide">
-            <h2>Special File Names</h2>
-            <p>Next.js looks for these exact names to provide automatic features:</p>
-            <div class="grid">
-                <div class="box">
-                    <h3>page.tsx</h3>
-                    <p>The main content of the route. This is what the user sees.</p>
-                </div>
-                <div class="box">
-                    <h3>layout.tsx</h3>
-                    <p>Shared UI (Navbars/Footers) that doesn't re-render on navigation.</p>
-                </div>
-                <div class="box">
-                    <h3>loading.tsx</h3>
-                    <p>Shown automatically while your data is fetching. No state needed!</p>
-                </div>
-                <div class="box">
-                    <h3>error.tsx</h3>
-                    <p>A "Safety Net" that shows a custom UI if your page crashes.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide">
-            <h2>Dynamic Routes <code>[id]</code></h2>
-            <p>Used when you have thousands of pages with the same layout (like products or blog posts).</p>
+            <h2>CRUD Made Simple</h2>
+            <p>You handle different HTTP methods by exporting named functions (GET, POST, DELETE, etc.) from one file.
+            </p>
             <pre>
-// Folder: app/product/[id]/page.tsx
-// URL: /product/iphone-15
+// app/api/products/route.ts
+import { NextResponse } from 'next/server';
 
-export default function Page({ params }) {
-  return &lt;h1&gt;Product ID: {params.id}&lt;/h1&gt;
+// 1. READ (GET)
+export async function GET() {
+  const data = await db.product.findMany(); // Direct DB access!
+  return NextResponse.json(data);
+}
+
+// 2. CREATE (POST)
+export async function POST(req: Request) {
+  const body = await req.json();
+  const newProduct = await db.product.create({ data: body });
+  return NextResponse.json(newProduct, { status: 201 });
 }
             </pre>
-            <p>The <code>[id]</code> acts as a <strong>wildcard variable</strong> in your URL.</p>
+
         </div>
 
         <div class="slide">
-            <h2>Route Groups <code>(group)</code></h2>
-            <p>Parentheses are for <strong>Visual Organization only</strong>. They are invisible to the URL.</p>
-            <div class="grid">
-                <pre class="folder-tree">
-app/
- ├── (auth)/
- │   ├── login/page.tsx
- │   └── layout.tsx  <-- Sidebar for Login
- └── (main)/
-     ├── home/page.tsx
-     └── layout.tsx  <-- Sidebar for App
+            <h2>Fetching Data</h2>
+            <p>Next.js 16 makes fetching data as easy as writing a standard JavaScript function. No more
+                <code>useEffect</code> boilerplate.
+            </p>
+            <div class="box">
+                <h3>Inside your Page (Server Component):</h3>
+                <pre>
+export default async function Page() {
+  // 1. Call your API or Database directly
+  const response = await fetch('http://localhost:3000/api/products');
+  const products = await response.json();
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Our Store&lt;/h1&gt;
+      {products.map(p => &lt;p key={p.id}&gt;{p.name}&lt;/p&gt;)}
+    &lt;/div&gt;
+  );
+}
                 </pre>
+            </div>
+            <p><strong>Why this is Pro:</strong> The data is fetched <u>before</u> the HTML is sent to the user. Fast,
+                SEO-friendly, and secure.</p>
+        </div>
+
+        <div class="slide">
+            <h2>When to choose what?</h2>
+            <div class="grid">
                 <div class="box">
-                    <h3>Why use them?</h3>
-                    <p>1. Organize code without changing the URL (<code>/login</code> instead of
-                        <code>/auth/login</code>).<br><br>
-                        2. Give different sections of your site completely different layouts.
-                    </p>
+                    <h3>Choose React (Alone)</h3>
+                    <ul>
+                        <li>Small prototypes.</li>
+                        <li>Non-SEO critical apps.</li>
+                        <li>Client-side only dashboards.</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h3>Choose Next.js</h3>
+                    <ul>
+                        <li><strong>SEO is required</strong> (Google visibility).</li>
+                        <li>Large production apps.</li>
+                        <li>Full-stack needs (Auth, DB, APIs).</li>
+                        <li>Best Performance out of the box.</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-
-        <div class="slide">
-            <h2>The 3 Ways to Render</h2>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                <tr style="border-bottom: 1px solid #333; text-align: left;">
-                    <th style="padding: 10px;">Type</th>
-                    <th>When?</th>
-                    <th>How?</th>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;"><strong>SSG</strong></td>
-                    <td>Build Time</td>
-                    <td>Default Behavior</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;"><strong>SSR</strong></td>
-                    <td>Per Request</td>
-                    <td><code>cache: 'no-store'</code></td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;"><strong>CSR</strong></td>
-                    <td>In Browser</td>
-                    <td><code>"use client"</code></td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="slide">
-            <h2>Project Architecture</h2>
-            <p>A professional setup for a Website + Dashboard + API:</p>
-            <pre class="folder-tree" style="font-size: 0.7rem;">
-src/
- ├── app/
- │   ├── (marketing)/    <-- Home, About, Pricing
- │   ├── (dashboard)/    <-- Protected User Panel
- │   ├── (auth)/         <-- Login / Register
- │   └── api/            <-- Backend Handlers (JSON)
- ├── components/
- │   ├── ui/             <-- Buttons, Modals
- │   └── layout/         <-- Navbars, Sidebars
- └── lib/                <-- Database, Auth logic
-            </pre>
+            <p style="text-align: center; margin-top: 20px; color: var(--accent);"><strong>Next.js is the modern
+                    standard for professional web development in 2026.</strong></p>
         </div>
 
         <div class="nav">
             <button class="btn" onclick="move(-1)">Previous</button>
-            <span class="progress"><span id="idx">1</span> / 7</span>
+            <span class="progress"><span id="idx">1</span> / 11</span>
             <button class="btn" onclick="move(1)">Next</button>
         </div>
     </div>
